@@ -1,0 +1,51 @@
+@import '../styles/theme';
+
+.navigation {
+    section {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .menu-btn {
+            color: #fff;
+            height: 2.4rem;
+            width: 2.4rem;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .title {
+            color: #fff;
+            margin: 0 2rem;
+
+            &:hover {
+                a {
+                    color: $primary;
+                }
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            .active {
+                color: $primary;
+            }
+        }
+    }
+
+    .header-nav {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        .header-nav {
+            display: none;
+        }
+    }
+}
