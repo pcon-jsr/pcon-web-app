@@ -1,7 +1,9 @@
 @import '../styles/theme';
 
 .navigation {
-    section {
+    justify-content: space-between;
+
+    .left-section {
         height: 100%;
         display: flex;
         align-items: center;
@@ -35,6 +37,56 @@
                 color: $primary;
             }
         }
+
+    }
+
+    .right-section {
+        margin-right: 2rem;
+        display: flex;
+        align-items: center;
+
+        a {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            background-color: #636466;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+                display: none;
+
+            }
+
+            &:hover {
+                background-color: #727272;
+
+                p {
+                    color: #fff;
+                    position: fixed;
+                    background-color: rgba($color: #000000, $alpha: 0.8);
+                    display: block;
+                    text-align: center;
+                    top: 3.1rem;
+                    right: 20px;
+                    padding: 5px;
+                    border-radius: 5px;
+                }
+            }
+
+            &.active {
+                .notification-btn {
+                    color: $primary;
+                }
+            }
+
+            .notification-btn {
+                color: #fff;
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+        }
     }
 
     .header-nav {
@@ -46,6 +98,18 @@
     .navigation {
         .header-nav {
             display: none;
+        }
+    }
+}
+
+@media (max-width: 1400px) {
+    .navigation {
+        .right-section {
+            a:hover {
+                p {
+                    display: none;
+                }
+            }
         }
     }
 }
