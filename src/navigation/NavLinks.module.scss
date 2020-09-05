@@ -72,6 +72,27 @@
         li:hover {
             p {
                 display: none;
+
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: row;
+        justify-content: space-around;
+
+        li {
+            width: 20%;
+
+            a {
+                margin: 0;
+                padding: 0;
+
+                &:hover {
+                    background-color: $accent;
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ import MainNavLinks from './MainNavLinks';
 import SideDrawer from './SideDrawer';
 import BackDrop from '../components/BackDrop';
 import SideNavLinks from './SideNavLinks';
+import BottomAppBar from './BottomAppBar';
 
 const MainNavigation = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -47,6 +48,9 @@ const MainNavigation = () => {
                     </NavLink>
                 </section>
             </MainHeader>
+            <BottomAppBar>
+                <MainNavLinks />
+            </BottomAppBar>
         </React.Fragment>
     );
 };
