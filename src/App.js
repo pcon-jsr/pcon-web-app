@@ -9,6 +9,7 @@ import MainNavigation from './navigation/MainNavigation';
 import HomeScreen from './screens/HomeScreen';
 import AuthScreen from './screens/AuthScreen';
 import SplashScreen from './screens/SplashScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -16,6 +17,13 @@ function App() {
 
   useEffect(() => {
     const unsubscribeAuth = firebaseAuth.onAuthStateChanged(userData => {
+
+      if (!userData) {
+        setCurrentUser(null);
+        setCheckingAuthState(false);
+        return;
+      }
+
       const user = {
         userId: userData.uid,
         name: userData.displayName,
@@ -44,6 +52,9 @@ function App() {
       <Switch>
         <Route exact path={navigationRoutes.HOME}>
           <HomeScreen />
+        </Route>
+        <Route exact path={navigationRoutes.PROFILE}>
+          <ProfileScreen />
         </Route>
         <Route exact path={navigationRoutes.EVENTS}>
 

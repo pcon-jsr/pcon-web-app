@@ -1,0 +1,135 @@
+@import "../../styles/theme";
+
+.profile-screen {
+    width: 100%;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    .logout-btn {
+        position: fixed;
+        top: 4rem;
+        right: 1rem;
+    }
+
+    .profile-section {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .card {
+            width: 30rem;
+            height: 30rem;
+            max-width: 40vw;
+            position: relative;
+            overflow: visible;
+
+            .avatar {
+                width: 12rem;
+                height: 12rem;
+                position: absolute;
+                top: -2rem;
+                left: -2rem;
+                z-index: 2;
+            }
+
+            .body {
+                margin-top: 10rem;
+                height: calc(100% - 10rem);
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: flex-start;
+
+                .main {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+
+                    h1 {
+                        font-size: 3rem;
+                        margin: 10px 0;
+                        color: $primary;
+                    }
+
+                    h4 {
+                        margin: 5px 0;
+                        font-size: 1.2rem;
+                        color: $accent;
+                    }
+                }
+
+                span {
+                    font-size: 2rem;
+                    color: $primary;
+                }
+
+            }
+        }
+    }
+
+    .verification-section {
+        width: 50%;
+    }
+}
+
+@media (max-width: 800px) {
+    .profile-screen {
+        min-height: calc(100vh - 8rem);
+        flex-direction: column;
+        padding-top: 2rem;
+
+        .profile-section {
+            width: 100%;
+
+            .card {
+                max-height: 40vh;
+                max-width: 90vw;
+
+                .avatar {
+                    width: 8rem;
+                    height: 8rem;
+                    top: -4rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                .body {
+
+                    margin-top: 4rem;
+                    height: calc(100% - 4rem);
+
+                    .main {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+
+                        h1 {
+                            font-size: 2rem;
+                            margin: 5px 0;
+                        }
+
+                        h4 {
+                            margin: 0;
+                            font-size: 0.75rem;
+                        }
+                    }
+
+                    span {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+
+        .verification-section {
+            width: 100%;
+        }
+    }
+}
