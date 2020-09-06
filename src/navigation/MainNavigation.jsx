@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './MainNavigation.module.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { CgMenu } from 'react-icons/cg';
 import { BsBellFill } from 'react-icons/bs';
 
@@ -11,9 +11,11 @@ import SideDrawer from './SideDrawer';
 import BackDrop from '../components/BackDrop';
 import SideNavLinks from './SideNavLinks';
 import BottomAppBar from './BottomAppBar';
+import { useEffect } from 'react';
 
 const MainNavigation = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const browserHistory = useHistory();
 
     const openDrawerHandler = () => {
         setDrawerOpen(true);
@@ -22,6 +24,19 @@ const MainNavigation = () => {
     const closeDrawerHandler = () => {
         setDrawerOpen(false);
     }
+
+    useEffect(() => {
+        const popListener = browserHistory.listen(location => {
+            if (drawerOpen && browserHistory.action === 'POP') {
+                closeDrawerHandler();
+                browserHistory.goForward();
+            }
+        });
+
+        return () => {
+            popListener();
+        }
+    }, [drawerOpen, browserHistory]);
 
     return (
         <React.Fragment>
