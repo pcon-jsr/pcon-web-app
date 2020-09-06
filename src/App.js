@@ -30,41 +30,74 @@ function App() {
   }, []);
 
   let routes;
-  routes = (
-    <Switch>
-      <Route exact path={navigationRoutes.HOME}>
-        <HomeScreen />
-      </Route>
-      <Route exact path={navigationRoutes.AUTH}>
-        <AuthScreen />
-      </Route>
-      <Route exact path={navigationRoutes.EVENTS}>
+  if (currentUser) {
+    routes = (
+      <Switch>
+        <Route exact path={navigationRoutes.HOME}>
+          <HomeScreen />
+        </Route>
+        <Route exact path={navigationRoutes.EVENTS}>
 
-      </Route>
-      <Route exact path={navigationRoutes.PROJECTS}>
+        </Route>
+        <Route exact path={navigationRoutes.PROJECTS}>
 
-      </Route>
-      <Route exact path={navigationRoutes.ACHIEVEMENTS}>
+        </Route>
+        <Route exact path={navigationRoutes.ACHIEVEMENTS}>
 
-      </Route>
-      <Route exact path={navigationRoutes.ALUMINI}>
+        </Route>
+        <Route exact path={navigationRoutes.ALUMINI}>
 
-      </Route>
-      <Route exact path={navigationRoutes.NOTIFICATIONS}>
+        </Route>
+        <Route exact path={navigationRoutes.NOTIFICATIONS}>
 
-      </Route>
-      <Route exact path={navigationRoutes.TEAM}>
+        </Route>
+        <Route exact path={navigationRoutes.TEAM}>
 
-      </Route>
-      <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
+        </Route>
+        <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
 
-      </Route>
-      <Route exact path={navigationRoutes.GALLERY}>
+        </Route>
+        <Route exact path={navigationRoutes.GALLERY}>
 
-      </Route>
-      <Redirect to={navigationRoutes.HOME} />
-    </Switch>
-  );
+        </Route>
+        <Redirect to={navigationRoutes.HOME} />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route exact path={navigationRoutes.HOME}>
+          <HomeScreen />
+        </Route>
+        <Route exact path={navigationRoutes.AUTH}>
+          <AuthScreen />
+        </Route>
+        <Route exact path={navigationRoutes.EVENTS}>
+
+        </Route>
+        <Route exact path={navigationRoutes.PROJECTS}>
+
+        </Route>
+        <Route exact path={navigationRoutes.ACHIEVEMENTS}>
+
+        </Route>
+        <Route exact path={navigationRoutes.ALUMINI}>
+
+        </Route>
+        <Route exact path={navigationRoutes.TEAM}>
+
+        </Route>
+        <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
+
+        </Route>
+        <Route exact path={navigationRoutes.GALLERY}>
+
+        </Route>
+        <Redirect to={navigationRoutes.AUTH} />
+      </Switch>
+    );
+  }
+
   return (
     <div className="App">
       <AuthContext.Provider
