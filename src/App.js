@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
-import { firebaseAuth } from './firebase/firebase.utils';
+import { firebaseAuth, createUserProfileDocument } from './firebase/firebase.utils';
 import { AuthContext } from './contexts';
 import { navigationRoutes } from './navigation/routes';
 import MainNavigation from './navigation/MainNavigation';
@@ -16,23 +16,26 @@ function App() {
   const [checkingAuthState, setCheckingAuthState] = useState(true);
 
   useEffect(() => {
-    const unsubscribeAuth = firebaseAuth.onAuthStateChanged(userData => {
+    const unsubscribeAuth = firebaseAuth.onAuthStateChanged(async userData => {
+      if (userData) {
+        const additionalData = {
+          registrationNum: '',
+          branch: '',
+          verified: false,
+        };
+        const userRef = await createUserProfileDocument(userData, additionalData);
 
-      if (!userData) {
+        userRef.onSnapshot(snapshot => {
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data(),
+          });
+          setCheckingAuthState(false);
+        });
+      } else {
         setCurrentUser(null);
         setCheckingAuthState(false);
-        return;
       }
-
-      const user = {
-        userId: userData.uid,
-        name: userData.displayName,
-        email: userData.email,
-        photoURL: userData.photoURL,
-      };
-      console.log(user);
-      setCurrentUser(user);
-      setCheckingAuthState(false);
     });
 
     return () => {
