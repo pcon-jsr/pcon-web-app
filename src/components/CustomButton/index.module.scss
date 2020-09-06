@@ -1,0 +1,48 @@
+@import '../../styles/theme';
+
+.btn {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 1rem;
+    font-size: 1.1rem;
+    background-color: $primary;
+    color: #fff;
+    transition: 0.1s linear;
+    box-shadow: 0px 0px 4px 2px $primary;
+    background-color: transparent;
+    color: $primary;
+
+    &:hover,
+    &.touch-hover {
+        transform: none;
+        box-shadow: none;
+        background-color: $primary;
+        color: #fff;
+    }
+
+    &.link {
+        text-decoration: none;
+    }
+
+    &.light {
+        box-shadow: 0px 0px 4px 2px #0ff;
+        background-color: transparent;
+        color: #0ff;
+
+        &:hover,
+        &.touch-hover {
+            transform: none;
+            box-shadow: none;
+            background-color: $primary;
+            color: #fff;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 10px;
+    }
+}

@@ -3,6 +3,7 @@
 .navigation {
     justify-content: space-between;
 
+
     .left-section {
         height: 100%;
         display: flex;
@@ -41,11 +42,11 @@
     }
 
     .right-section {
-        margin-right: 2rem;
+        margin-right: 1rem;
         display: flex;
         align-items: center;
 
-        a {
+        a.action-btn {
             height: 3rem;
             width: 3rem;
             border-radius: 50%;
@@ -102,6 +103,12 @@
 
 @media (max-width: 768px) {
     .navigation {
+        .left-section {
+            .title {
+                margin: 0 1rem;
+            }
+        }
+
         .header-nav {
             display: none;
         }

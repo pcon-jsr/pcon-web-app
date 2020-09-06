@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './MainNavigation.module.scss';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import { CgMenu } from 'react-icons/cg';
 import { BsBellFill } from 'react-icons/bs';
 
@@ -12,6 +12,7 @@ import BackDrop from '../components/BackDrop';
 import SideNavLinks from './SideNavLinks';
 import BottomAppBar from './BottomAppBar';
 import { useEffect } from 'react';
+import CustomButton from '../components/CustomButton';
 
 const MainNavigation = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -57,10 +58,13 @@ const MainNavigation = () => {
                     <MainNavLinks />
                 </nav>
                 <section className={styles['right-section']}>
-                    <NavLink exact to={navigationRoutes.NOTIFICATIONS} activeClassName={styles['active']}>
+                    <NavLink exact to={navigationRoutes.NOTIFICATIONS} className={styles['action-btn']} activeClassName={styles['active']}>
                         <BsBellFill className={styles['notification-btn']} />
                         <p>NOTIFICATIONS</p>
                     </NavLink>
+                    <CustomButton to={navigationRoutes.AUTH} className={styles['btn']} light>
+                        SIGN IN
+                    </CustomButton>
                 </section>
             </MainHeader>
             <BottomAppBar>

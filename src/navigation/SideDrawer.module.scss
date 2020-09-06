@@ -36,8 +36,10 @@
     transition: all 200ms;
 }
 
-// @media (min-width: 768px) {
-//     .side-drawer {
-//         display: none;
-//     }
-// }
+@media (max-width: 768px) {
+    .side-drawer {
+        padding-top: 2rem;
+        justify-content: flex-start;
+        ;
+    }
+}
