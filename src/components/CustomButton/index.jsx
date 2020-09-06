@@ -48,7 +48,7 @@ const CustomButton = (props) => {
         </Link>
 
     ) : (
-            <button ref={btnRef} className={`${styles['btn']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`} >
+            <button ref={btnRef} onClick={props.onClick} className={`${styles['btn']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`} >
                 {props.children}
             </button>
         );

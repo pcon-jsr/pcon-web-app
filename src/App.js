@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
+import { firebaseAuth } from './firebase/firebase.utils';
+import { AuthContext } from './contexts';
 import { navigationRoutes } from './navigation/routes';
 import MainNavigation from './navigation/MainNavigation';
 import HomeScreen from './screens/HomeScreen';
 import AuthScreen from './screens/AuthScreen';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribeAuth = firebaseAuth.onAuthStateChanged(userData => {
+      const user = {
+        userId: userData.uid,
+        name: userData.displayName,
+        email: userData.email,
+        photoURL: userData.photoURL,
+      };
+      console.log(user);
+      setCurrentUser(user);
+    });
+
+    return () => {
+      unsubscribeAuth();
+    };
+  }, []);
 
   let routes;
   routes = (
@@ -47,12 +67,18 @@ function App() {
   );
   return (
     <div className="App">
-      <Router>
-        <MainNavigation />
-        <main>
-          {routes}
-        </main>
-      </Router>
+      <AuthContext.Provider
+        value={{
+          user: currentUser,
+        }}
+      >
+        <Router>
+          <MainNavigation />
+          <main>
+            {routes}
+          </main>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }
