@@ -13,28 +13,31 @@ const MainNavLinks = () => {
         <IconContext.Provider value={{ className: styles['icon'] }}>
             <ul className={styles['nav-links']}>
                 <li>
-                    <p>EVENTS</p>
                     <NavLink exact to={navigationRoutes.EVENTS} activeClassName={styles['active']}>
                         <BsCalendarFill />
+                        <p>EVENTS</p>
                     </NavLink>
                 </li>
                 <li>
-                    <p>PROJECTS</p>
+
                     <NavLink exact to={navigationRoutes.PROJECTS} activeClassName={styles['active']}>
                         <SiMoleculer />
+                        <p>PROJECTS</p>
                     </NavLink>
                 </li>
                 <li>
-                    <p>ACHIEVEMENTS</p>
+
                     <NavLink exact to={navigationRoutes.ACHIEVEMENTS} activeClassName={styles['active']}>
                         <BsFillStarFill />
+                        <p>ACHIEVEMENTS</p>
                     </NavLink>
 
                 </li>
                 <li>
-                    <p>ALUMINI</p>
+
                     <NavLink exact to={navigationRoutes.ALUMINI} activeClassName={styles['active']}>
                         <FaUserGraduate />
+                        <p>ALUMINI</p>
                     </NavLink>
                 </li>
             </ul>

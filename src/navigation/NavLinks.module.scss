@@ -3,6 +3,8 @@
 .icon {
     width: 2rem;
     height: 2rem;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-links {
@@ -10,7 +12,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    height: 3.5rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -18,63 +20,61 @@
 
     li {
         margin: 0 1rem;
-        width: 5rem;
+        padding: 0 0.4rem;
+        min-width: 5rem;
         height: 100%;
-
-        p {
-            padding: 0;
-            margin: 0;
-            display: none;
-            position: fixed;
-            z-index: 100;
-        }
-
-        &:hover {
-            p {
-                color: #fff;
-                background-color: rgba($color: #000000, $alpha: 0.8);
-                display: block;
-                text-align: center;
-                top: 4.1rem;
-                padding: 5px;
-                border-radius: 5px;
-            }
-        }
-    }
-
-    a {
-        color: white;
-        text-decoration: none;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        height: 100%;
-        width: 100%;
 
-        &.active {
-            color: $primary;
+        a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+
+            p {
+                padding: 0px;
+                margin: 2px 1px;
+                font-size: 0.6rem;
+            }
+
+            &.active {
+                color: $primary;
+            }
         }
 
         &:hover {
             cursor: pointer;
             border-radius: 5px;
             background-color: #5c5c5c;
-
         }
     }
 
+
+
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 900px) {
     .nav-links {
-        li:hover {
-            p {
-                display: none;
+        li {
+            margin: 0 0.1rem;
 
+            a {
+                p {
+                    display: none;
+                }
+            }
+
+            a.active {
+                p {
+                    display: block;
+                }
             }
         }
+
     }
 }
 
@@ -85,10 +85,20 @@
 
         li {
             width: 20%;
+            min-width: 1rem;
+            margin: 0;
+            padding: 0;
 
             a {
                 margin: 0;
                 padding: 0;
+                width: 100%;
+
+                p {
+                    padding: 0px;
+                    margin: 0;
+                    font-size: 0.75rem;
+                }
 
                 &:hover {
                     background-color: $accent;
