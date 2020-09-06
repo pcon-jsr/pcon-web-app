@@ -1,0 +1,63 @@
+@import '../../styles/theme';
+
+.auth {
+    height: calc(100vh - 4rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/cool-background.png');
+    background-size: cover;
+
+    .card {
+        height: 50%;
+        width: 24rem;
+        max-width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        .body {
+            h1 {
+                font-size: 3rem;
+                color: $primary;
+            }
+
+            h3 {
+                font-size: 2rem;
+                color: $accent;
+            }
+        }
+
+        .btn {
+            width: 90%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .icon {
+                height: 2rem;
+                width: 2rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .auth {
+        height: calc(100vh - 8rem);
+
+        .card {
+            height: 70%;
+
+            .btn {
+                justify-content: center;
+
+                span {
+                    font-size: 0.9rem;
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}

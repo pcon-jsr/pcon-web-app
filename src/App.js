@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { navigationRoutes } from './navigation/routes';
 import MainNavigation from './navigation/MainNavigation';
 import HomeScreen from './screens/HomeScreen';
+import AuthScreen from './screens/AuthScreen';
 
 function App() {
 
@@ -13,6 +14,9 @@ function App() {
     <Switch>
       <Route exact path={navigationRoutes.HOME}>
         <HomeScreen />
+      </Route>
+      <Route exact path={navigationRoutes.AUTH}>
+        <AuthScreen />
       </Route>
       <Route exact path={navigationRoutes.EVENTS}>
 
