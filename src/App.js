@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import { navigationRoutes } from './navigation/routes';
 import MainNavigation from './navigation/MainNavigation';
+import HomeScreen from './screens/HomeScreen';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
   routes = (
     <Switch>
       <Route exact path={navigationRoutes.HOME}>
-
+        <HomeScreen />
       </Route>
       <Route exact path={navigationRoutes.EVENTS}>
 

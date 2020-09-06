@@ -4,3 +4,7 @@
   text-align: center;
   font-family: "Roboto Slab", serif;
 }
+
+.App main {
+  margin-top: 4rem;
+}
