@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './MainNavigation.module.scss';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { CgMenu } from 'react-icons/cg';
 import { BsBellFill } from 'react-icons/bs';
 
