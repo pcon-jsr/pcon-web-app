@@ -12,7 +12,7 @@ const AuthScreen = () => {
                     <h1>HOLA!!!</h1>
                     <h3>Welcome to PCON</h3>
                 </div>
-                <CustomButton className={styles['btn']}>
+                <CustomButton className={styles['btn']} light>
                     <FcGoogle className={styles['icon']} />
                     <span>SIGN IN WITH GOOGLE</span>
                 </CustomButton>
