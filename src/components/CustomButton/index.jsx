@@ -11,12 +11,12 @@ const CustomButton = (props) => {
     }
 
     const touchStartHandler = useCallback((e) => {
-        e.preventDefault();
+        // e.preventDefault();
         toggleTouchHover();
     }, []);
 
     const touchEndHandler = useCallback((e) => {
-        e.preventDefault();
+        // e.preventDefault();
         toggleTouchHover();
     }, []);
 
