@@ -3,7 +3,6 @@ import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 
 const CustomButton = (props) => {
-    const linkRef = useRef();
     const btnRef = useRef();
     const [touchHover, setTouchHover] = useState(false);
 
@@ -18,9 +17,7 @@ const CustomButton = (props) => {
 
     const touchEndHandler = useCallback((e) => {
         e.preventDefault();
-        setTimeout(() => {
-            toggleTouchHover();
-        }, 100);
+        toggleTouchHover();
     }, []);
 
     const { to, href } = props;
@@ -29,10 +26,7 @@ const CustomButton = (props) => {
             return;
         }
 
-        if (to) {
-            linkRef.current.ontouchstart = touchStartHandler;
-            linkRef.current.ontouchend = touchEndHandler;
-        } else {
+        if (!to) {
             btnRef.current.ontouchstart = touchStartHandler;
             btnRef.current.ontouchend = touchEndHandler;
         }
@@ -49,12 +43,12 @@ const CustomButton = (props) => {
 
 
     return props.to ? (
-        <Link ref={linkRef} to={props.to} className={`${styles['btn']} ${styles['link']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`}>
+        <Link to={props.to} className={`${styles['btn']} ${styles['link']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`}>
             {props.children}
         </Link>
 
     ) : (
-            <button ref={btnRef} {...props} light="_" className={`${styles['btn']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`} >
+            <button ref={btnRef} className={`${styles['btn']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`} >
                 {props.children}
             </button>
         );
