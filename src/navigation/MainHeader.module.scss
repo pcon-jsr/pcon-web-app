@@ -13,3 +13,9 @@
     padding: 0 1rem;
     z-index: 5;
 }
+
+@media (max-width: 330px) {
+    .main-header {
+        padding: 0 0 0 1rem;
+    }
+}

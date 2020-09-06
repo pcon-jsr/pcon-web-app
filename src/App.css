@@ -8,3 +8,9 @@
 .App main {
   margin-top: 4rem;
 }
+
+@media (max-width: 768px) {
+  .App main {
+    margin-bottom: 4rem;
+  }
+}
