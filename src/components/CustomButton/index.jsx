@@ -1,9 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { useState } from 'react';
 
 const CustomButton = (props) => {
     const linkRef = useRef();

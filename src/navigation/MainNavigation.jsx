@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './MainNavigation.module.scss';
 import { NavLink, useHistory } from 'react-router-dom';
 import { CgMenu } from 'react-icons/cg';
@@ -11,7 +11,6 @@ import SideDrawer from './SideDrawer';
 import BackDrop from '../components/BackDrop';
 import SideNavLinks from './SideNavLinks';
 import BottomAppBar from './BottomAppBar';
-import { useEffect } from 'react';
 import CustomButton from '../components/CustomButton';
 
 const MainNavigation = () => {
