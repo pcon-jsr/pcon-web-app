@@ -8,9 +8,11 @@ import { navigationRoutes } from './navigation/routes';
 import MainNavigation from './navigation/MainNavigation';
 import HomeScreen from './screens/HomeScreen';
 import AuthScreen from './screens/AuthScreen';
+import SplashScreen from './screens/SplashScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [checkingAuthState, setCheckingAuthState] = useState(true);
 
   useEffect(() => {
     const unsubscribeAuth = firebaseAuth.onAuthStateChanged(userData => {
@@ -22,12 +24,19 @@ function App() {
       };
       console.log(user);
       setCurrentUser(user);
+      setCheckingAuthState(false);
     });
 
     return () => {
       unsubscribeAuth();
     };
   }, []);
+
+  if (checkingAuthState) {
+    return (
+      <SplashScreen />
+    );
+  }
 
   let routes;
   if (currentUser) {
@@ -102,7 +111,7 @@ function App() {
     <div className="App">
       <AuthContext.Provider
         value={{
-          user: currentUser,
+          user: currentUser
         }}
       >
         <Router>
