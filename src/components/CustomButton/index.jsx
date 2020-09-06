@@ -23,8 +23,12 @@ const CustomButton = (props) => {
         }, 100);
     }, []);
 
-    const { to } = props;
+    const { to, href } = props;
     useEffect(() => {
+        if (href) {
+            return;
+        }
+
         if (to) {
             linkRef.current.ontouchstart = touchStartHandler;
             linkRef.current.ontouchend = touchEndHandler;
@@ -33,7 +37,16 @@ const CustomButton = (props) => {
             btnRef.current.ontouchend = touchEndHandler;
         }
 
-    }, [to, touchStartHandler, touchEndHandler]);
+    }, [to, href, touchStartHandler, touchEndHandler]);
+
+    if (props.href) {
+        return (
+            <a target="_blank" rel="noopener noreferrer" href={props.href} className={`${styles['btn']} ${styles['link']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`}>
+                {props.children}
+            </a>
+        );
+    }
+
 
     return props.to ? (
         <Link ref={linkRef} to={props.to} className={`${styles['btn']} ${styles['link']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`}>

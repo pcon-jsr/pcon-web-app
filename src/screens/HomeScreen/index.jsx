@@ -58,9 +58,11 @@ const HomeScreen = () => {
                         talent and setting high standards of education and excellence.
                         <br />
                     </p>
-                    <a target={"blank"} href={`http://nitjsr.ac.in/`}>
-                        <CustomButton >VIEW MORE </CustomButton>
-                    </a>
+
+                    <CustomButton target="_blank" rel="noopener noreferrer" href={`http://nitjsr.ac.in/`}>
+                        VIEW MORE
+                    </CustomButton>
+
                 </Card>
             </section>
         </div>
