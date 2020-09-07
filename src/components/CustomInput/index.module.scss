@@ -14,7 +14,8 @@
         color: $primary;
     }
 
-    input {
+    input,
+    select {
         display: block;
         width: 100%;
         font: inherit;
@@ -55,7 +56,8 @@
         color: red;
     }
 
-    input {
+    input,
+    select {
         border-color: red;
         background: #ffd1d1;
     }

@@ -15,6 +15,24 @@
     color: $primary;
     cursor: pointer;
 
+    &:disabled {
+        background: #ccc;
+        color: #979797;
+        border-color: #ccc;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        &:disabled {
+            background: #ccc;
+            color: #979797;
+            border-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+    }
+
     &:hover,
     &.touch-hover {
         transform: none;
@@ -39,6 +57,8 @@
             background-color: $primary;
             color: #fff;
         }
+
+
     }
 }
 

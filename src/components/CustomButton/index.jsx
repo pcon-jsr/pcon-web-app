@@ -42,13 +42,18 @@ const CustomButton = (props) => {
     }
 
 
+    const generalButtonProps = { ...props };
+    if (generalButtonProps.light) {
+        delete generalButtonProps.light;
+    }
+
     return props.to ? (
         <Link to={props.to} className={`${styles['btn']} ${styles['link']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`}>
             {props.children}
         </Link>
 
     ) : (
-            <button ref={btnRef} onClick={props.onClick} className={`${styles['btn']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`} >
+            <button {...generalButtonProps} ref={btnRef} onClick={props.onClick} className={`${styles['btn']} ${props.light ? styles['light'] : null} ${touchHover ? styles['touch-hover'] : null} ${props.className}`}>
                 {props.children}
             </button>
         );

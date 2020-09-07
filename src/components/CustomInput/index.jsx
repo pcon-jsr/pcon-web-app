@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import styles from './index.module.scss';
 import { validate } from '../../utils/validators';
 
@@ -28,12 +28,19 @@ const inputReducer = (state, action) => {
 
 const CustomInput = (props) => {
     const INITIAL_STATE = {
-        value: '',
-        isValid: false,
+        value: props.initialValue || '',
+        isValid: props.initialValidity || false,
         isTouched: false,
     };
 
     const [inputState, dispatch] = useReducer(inputReducer, INITIAL_STATE);
+
+    const { id, getInput } = props;
+    const { value, isValid } = inputState;
+
+    useEffect(() => {
+        getInput(id, value, isValid);
+    }, [id, value, isValid, getInput]);
 
     const changeHandler = event => {
         dispatch({
@@ -69,6 +76,23 @@ const CustomInput = (props) => {
                 onBlur={touchHandler}
                 value={inputState.value}
             />
+        );
+    } else if (props.element === 'select') {
+        element = (
+            <select
+                id={props.id}
+                onChange={changeHandler}
+                onBlur={touchHandler}
+                value={inputState.value || props.optionList[0].value}
+            >
+                {
+                    props.optionList.map((op) => (
+                        <option key={op.key} value={op.value}>
+                            {op.value}
+                        </option>
+                    ))
+                }
+            </select>
         );
     }
 
