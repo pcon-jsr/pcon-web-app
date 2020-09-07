@@ -1,8 +1,9 @@
-import React, { useContext, useCallback, useReducer } from 'react';
+import React, { useContext } from 'react';
 import styles from './index.module.scss';
 import { AuthContext } from '../../contexts';
 import { firebaseAuth } from '../../firebase/firebase.utils';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../utils/validators';
+import { useForm } from '../../hooks/form-hook';
 import Card from '../../components/Card';
 import Avatar from '../../components/Avatar';
 import CustomButton from '../../components/CustomButton';
@@ -51,65 +52,27 @@ const branchList = [
     },
 ];
 
-const formActionTypes = {
-    INPUT_CHANGE: 'INPUT_CHANGE',
-}
-
-const formReducer = (state, action) => {
-    switch (action.type) {
-        case formActionTypes.INPUT_CHANGE:
-            let formIsValid = true;
-            for (const inputId in state.inputs) {
-                if (inputId === action.inputId) {
-                    formIsValid = formIsValid && action.isValid;
-                } else {
-                    formIsValid = formIsValid && state.inputs[inputId].isValid;
-                }
-            }
-            return {
-                ...state,
-                inputs: {
-                    ...state.inputs,
-                    [action.inputId]: { value: action.value, isValid: action.isValid },
-                },
-                isValid: formIsValid,
-            };
-
-        default:
-            return state;
-    }
+const INITIAL_FORM_STATE = {
+    inputs: {
+        registrationNum: {
+            value: '',
+            isValid: false,
+        },
+        branch: {
+            value: '',
+            isValid: false,
+        },
+    },
+    isValid: false,
 };
 
 const ProfileScreen = () => {
     const auth = useContext(AuthContext);
-
-    const INITIAL_FORM_STATE = {
-        inputs: {
-            registrationNum: {
-                value: '',
-                isValid: false,
-            },
-            branch: {
-                value: '',
-                isValid: false,
-            },
-        },
-        isValid: false,
-    };
-    const [formState, dispatch] = useReducer(formReducer, INITIAL_FORM_STATE);
+    const { formState, inputHandler } = useForm(INITIAL_FORM_STATE);
 
     const logoutHandler = () => {
         firebaseAuth.signOut();
     }
-
-    const inputHandler = useCallback((id, value, isValid) => {
-        dispatch({
-            type: formActionTypes.INPUT_CHANGE,
-            value: value,
-            isValid: isValid,
-            inputId: id,
-        });
-    }, [dispatch]);
 
     const verificationFormSubmitHandler = (event) => {
         event.preventDefault();
