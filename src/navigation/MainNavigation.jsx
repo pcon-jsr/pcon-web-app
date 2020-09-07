@@ -59,14 +59,9 @@ const MainNavigation = () => {
                     <MainNavLinks />
                 </nav>
                 <section className={styles['right-section']}>
-                    {
-                        auth.user && (
-                            <NavLink exact to={navigationRoutes.NOTIFICATIONS} className={styles['action-btn']} activeClassName={styles['active']}>
-                                <BsBellFill className={styles['notification-btn']} />
-                                <p>NOTIFICATIONS</p>
-                            </NavLink>
-                        )
-                    }
+                    <NavLink exact to={navigationRoutes.NOTIFICATIONS} className={styles['action-btn']} activeClassName={styles['active']}>
+                        <BsBellFill className={styles['notification-btn']} />
+                    </NavLink>
                     {
                         auth.user && (
                             <Link to={navigationRoutes.PROFILE} className={styles['action-btn']}>

@@ -114,6 +114,9 @@ function App() {
         <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
 
         </Route>
+        <Route exact path={navigationRoutes.NOTIFICATIONS}>
+
+        </Route>
         <Route exact path={navigationRoutes.GALLERY}>
 
         </Route>
