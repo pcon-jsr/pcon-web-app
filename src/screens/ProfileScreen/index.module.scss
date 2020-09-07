@@ -83,7 +83,7 @@
         justify-content: center;
         align-items: center;
 
-        .card {
+        .form-card {
             width: 90%;
 
             .title {
@@ -103,6 +103,50 @@
                 width: 90%;
                 position: relative;
                 overflow: hidden;
+            }
+        }
+
+        .under-review-card,
+        .verified-card {
+            width: 30rem;
+            max-width: 40vw;
+        }
+
+        .under-review-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #f09d02;
+
+            .icon {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            h2 {
+                margin: 30px 0 10px 0;
+            }
+
+            h3 {
+                margin: 2px 0;
+            }
+        }
+
+        .verified-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #1aa260;
+
+            .icon {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            h1 {
+                margin: 30px 0;
             }
         }
     }
@@ -163,6 +207,11 @@
         .verification-section {
             width: 100%;
             margin: 0.5rem 0 1rem 0;
+
+            .under-review-card,
+            .verified-card {
+                max-width: 90vw;
+            }
         }
     }
 }
