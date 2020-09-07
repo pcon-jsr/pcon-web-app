@@ -8,6 +8,7 @@ import Card from '../../components/Card';
 import Avatar from '../../components/Avatar';
 import CustomButton from '../../components/CustomButton';
 import CustomInput from '../../components/CustomInput';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const branchList = [
     {
@@ -130,7 +131,7 @@ const ProfileScreen = () => {
                     }
                     {
                         loading && (
-                            <h4>Please wait...</h4>
+                            <LoadingSpinner />
                         )
                     }
                 </form>
