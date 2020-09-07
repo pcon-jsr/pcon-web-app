@@ -22,6 +22,7 @@ function App() {
           registrationNum: '',
           branch: '',
           verified: false,
+          appliedForVerification: false,
         };
         const userRef = await createUserProfileDocument(userData, additionalData);
 

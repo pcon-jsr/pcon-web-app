@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './index.module.scss';
 import { AuthContext } from '../../contexts';
-import { firebaseAuth } from '../../firebase/firebase.utils';
+import { firebaseAuth, updateUserProfileDocument } from '../../firebase/firebase.utils';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../utils/validators';
 import { useForm } from '../../hooks/form-hook';
 import Card from '../../components/Card';
@@ -69,14 +69,23 @@ const INITIAL_FORM_STATE = {
 const ProfileScreen = () => {
     const auth = useContext(AuthContext);
     const { formState, inputHandler } = useForm(INITIAL_FORM_STATE);
+    const [loading, setLoading] = useState(false);
 
     const logoutHandler = () => {
         firebaseAuth.signOut();
     }
 
-    const verificationFormSubmitHandler = (event) => {
+    const verificationFormSubmitHandler = async (event) => {
         event.preventDefault();
-        console.log(formState);
+        const { branch, registrationNum } = formState.inputs;
+
+        setLoading(true);
+        await updateUserProfileDocument(user.id, {
+            branch: branch.value,
+            registrationNum: registrationNum.value?.toUpperCase(),
+            appliedForVerification: true,
+        });
+        setLoading(false);
     }
 
     const { user } = auth;
@@ -84,9 +93,11 @@ const ProfileScreen = () => {
     let verificationContent = null;
     if (user.verified) {
         verificationContent = <h1>VERFIFIED!</h1>;
-    } else {
+    } else if (!user.verified && !user.appliedForVerification) {
         verificationContent = (
             <Card className={styles['card']}>
+                <h1 className={styles['title']}>Unverified Account</h1>
+                <h3 className={styles['sub-title']}>Apply for verification</h3>
                 <form onSubmit={verificationFormSubmitHandler} className={styles['verification-form']}>
                     <CustomInput
                         id="registrationNum"
@@ -107,14 +118,27 @@ const ProfileScreen = () => {
                         initialValue={branchList[0].value}
                         initialValidity={true}
                     />
-                    <CustomButton
-                        type="submit"
-                        disabled={!formState.isValid}
-                    >
-                        SUBMIT
-                    </CustomButton>
+                    {
+                        !loading && (
+                            <CustomButton
+                                type="submit"
+                                disabled={!formState.isValid}
+                            >
+                                SUBMIT
+                            </CustomButton>
+                        )
+                    }
+                    {
+                        loading && (
+                            <h4>Please wait...</h4>
+                        )
+                    }
                 </form>
             </Card>
+        );
+    } else if (!user.verified && user.appliedForVerification) {
+        verificationContent = (
+            <h3>Your Account is under review for verification</h3>
         );
     }
 

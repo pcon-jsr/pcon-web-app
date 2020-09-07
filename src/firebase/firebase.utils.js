@@ -50,4 +50,16 @@ export const createUserProfileDocument = async (userAuthData, additionalData) =>
     return userRef;
 }
 
+export const updateUserProfileDocument = async (userId, data) => {
+
+    const userRef = firestore.doc(`users/${userId}`);
+    try {
+        await userRef.update({
+            ...data,
+        });
+    } catch (error) {
+        console.log('something went wrong: ', error.message);
+    }
+}
+
 export default firebase;
