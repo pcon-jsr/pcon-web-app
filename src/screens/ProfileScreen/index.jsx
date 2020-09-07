@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styles from './index.module.scss';
 import { AuthContext } from '../../contexts';
 import { firebaseAuth } from '../../firebase/firebase.utils';
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../utils/validators';
 import Card from '../../components/Card';
 import Avatar from '../../components/Avatar';
 import CustomButton from '../../components/CustomButton';
@@ -25,8 +26,9 @@ const ProfileScreen = () => {
                 <form className={styles['verification-form']}>
                     <CustomInput
                         type="text"
-                        label="Registration Number"
-                        placeholder="for eg.: 2017UGCS001"
+                        label="College Registration Number"
+                        validators={[VALIDATOR_MINLENGTH(10)]}
+                        errorText={"Should be atleast 10 characters"}
                     />
                 </form>
             </Card>
