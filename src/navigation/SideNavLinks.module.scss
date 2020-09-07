@@ -70,7 +70,22 @@
 
     .nav-links {
         li {
-            width: 80%;
+            width: 90%;
+
+            p {
+                font-size: 0.9rem;
+
+            }
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    .nav-links {
+        li {
+            p {
+                font-size: 0.68rem;
+            }
         }
     }
 }
