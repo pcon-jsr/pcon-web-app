@@ -5,6 +5,7 @@ import { firebaseAuth } from '../../firebase/firebase.utils';
 import Card from '../../components/Card';
 import Avatar from '../../components/Avatar';
 import CustomButton from '../../components/CustomButton';
+import CustomInput from '../../components/CustomInput';
 
 const ProfileScreen = () => {
     const auth = useContext(AuthContext);
@@ -14,6 +15,24 @@ const ProfileScreen = () => {
     }
 
     const { user } = auth;
+
+    let verificationContent = null;
+    if (user.verified) {
+        verificationContent = <h1>VERFIFIED!</h1>;
+    } else {
+        verificationContent = (
+            <Card className={styles['card']}>
+                <form className={styles['verification-form']}>
+                    <CustomInput
+                        type="text"
+                        label="Registration Number"
+                        placeholder="for eg.: 2017UGCS001"
+                    />
+                </form>
+            </Card>
+        );
+    }
+
     return (
         <div className={styles['profile-screen']}>
             <CustomButton
@@ -40,7 +59,7 @@ const ProfileScreen = () => {
                 </Card>
             </section>
             <section className={styles['verification-section']}>
-
+                {verificationContent}
             </section>
         </div>
     );

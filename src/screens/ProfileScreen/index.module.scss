@@ -6,12 +6,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 6rem;
+    position: relative;
 
     .logout-btn {
-        position: fixed;
-        top: 4rem;
-        right: 1rem;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
     }
 
     .profile-section {
@@ -75,6 +77,22 @@
 
     .verification-section {
         width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .card {
+            width: 90%;
+
+            .verification-form {
+                list-style: none;
+                margin: 0 auto 25px auto;
+                padding: 1rem;
+                width: 90%;
+                position: relative;
+                overflow: hidden;
+            }
+        }
     }
 }
 
@@ -82,10 +100,12 @@
     .profile-screen {
         min-height: calc(100vh - 8rem);
         flex-direction: column;
+        justify-content: center;
         padding-top: 6rem;
 
         .profile-section {
             width: 100%;
+            margin: 1rem 0 0.5rem 0;
 
             .card {
                 max-height: 40vh;
@@ -95,8 +115,8 @@
                     width: 8rem;
                     height: 8rem;
                     top: -4rem;
-                    left: 50%;
-                    transform: translateX(-50%);
+                    left: 20%;
+                    transform: translateX(-20%);
                 }
 
                 .body {
@@ -130,6 +150,7 @@
 
         .verification-section {
             width: 100%;
+            margin: 0.5rem 0 1rem 0;
         }
     }
 }
