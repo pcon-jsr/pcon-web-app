@@ -20,6 +20,7 @@ import Avatar from "../../components/Avatar";
 import CustomButton from "../../components/CustomButton";
 import CustomInput from "../../components/CustomInput";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import ErrorModal from "../../components/ErrorModal";
 
 const INITIAL_FORM_STATE = {
     inputs: {
@@ -37,9 +38,9 @@ const INITIAL_FORM_STATE = {
 
 const ProfileScreen = () => {
     const auth = useContext(AuthContext);
-
     const { formState, inputHandler } = useForm(INITIAL_FORM_STATE);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const logoutHandler = () => {
         firebaseAuth.signOut();
@@ -52,11 +53,16 @@ const ProfileScreen = () => {
 
         setLoading(true);
 
-        await updateUserProfileDocument(user.id, {
-            branch: branch.value,
-            registrationNum: registrationNum.value?.toUpperCase(),
-            appliedForVerification: true,
-        });
+        try {
+            await updateUserProfileDocument(user.id, {
+                branch: branch.value,
+                registrationNum: registrationNum.value?.toUpperCase(),
+                appliedForVerification: true,
+            });
+        } catch (err) {
+            setError(err.message);
+        }
+
         setLoading(false);
     };
 
@@ -123,30 +129,39 @@ const ProfileScreen = () => {
         );
     }
 
-    return (
-        <div className={styles["profile-screen"]}>
-            <CustomButton className={styles["logout-btn"]} onClick={logoutHandler}>
-                LOGOUT
-            </CustomButton>
-            <section className={styles["profile-section"]}>
-                <Card className={styles["card"]}>
-                    <Avatar src={user.photoURL} className={styles["avatar"]} />
-                    <div className={styles["body"]}>
-                        <div className={styles["main"]}>
+    const clearErrorHandler = () => {
+        setError('');
+    }
 
-                            <h1> {user.name}</h1> <h4> {user.email}</h4>
+    return (
+        <React.Fragment>
+            <ErrorModal
+                error={error}
+                onClear={clearErrorHandler}
+            />
+            <div className={styles["profile-screen"]}>
+                <CustomButton className={styles["logout-btn"]} onClick={logoutHandler}>
+                    LOGOUT
+                </CustomButton>
+                <section className={styles["profile-section"]}>
+                    <Card className={styles["card"]}>
+                        <Avatar src={user.photoURL} className={styles["avatar"]} />
+                        <div className={styles["body"]}>
+                            <div className={styles["main"]}>
+                                <h1> {user.name}</h1> <h4> {user.email}</h4>
+                            </div>
+                            <span> Branch: {user.branch ? user.branch : "NA"}</span>
+                            <span>
+                                Reg No: {user.registrationNum ? user.registrationNum : "NA"}
+                            </span>
                         </div>
-                        <span> Branch: {user.branch ? user.branch : "NA"}</span>
-                        <span>
-                            Reg No: {user.registrationNum ? user.registrationNum : "NA"}
-                        </span>
-                    </div>
-                </Card>
-            </section>
-            <section className={styles["verification-section"]}>
-                {verificationContent}
-            </section>
-        </div>
+                    </Card>
+                </section>
+                <section className={styles["verification-section"]}>
+                    {verificationContent}
+                </section>
+            </div>
+        </React.Fragment>
     );
 };
 

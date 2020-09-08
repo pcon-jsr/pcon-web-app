@@ -12,10 +12,12 @@ import SplashScreen from './screens/SplashScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import InterviewsScreen from './screens/InterviewsScreen';
 import CreateInterviewScreen from './screens/CreateInterviewScreen';
+import ErrorModal from './components/ErrorModal';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [checkingAuthState, setCheckingAuthState] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const unsubscribeAuth = firebaseAuth.onAuthStateChanged(async userData => {
@@ -109,21 +111,31 @@ function App() {
     );
   }
 
+  const clearErrorHandler = () => {
+    setError('');
+  }
+
   return (
-    <div className="App">
-      <AuthContext.Provider
-        value={{
-          user: currentUser
-        }}
-      >
-        <Router>
-          <MainNavigation />
-          <main>
-            {routes}
-          </main>
-        </Router>
-      </AuthContext.Provider>
-    </div>
+    <React.Fragment>
+      <ErrorModal
+        error={error}
+        onClear={clearErrorHandler}
+      />
+      <div className="App">
+        <AuthContext.Provider
+          value={{
+            user: currentUser
+          }}
+        >
+          <Router>
+            <MainNavigation />
+            <main>
+              {routes}
+            </main>
+          </Router>
+        </AuthContext.Provider>
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -43,7 +43,7 @@ export const createUserProfileDocument = async (userAuthData, additionalData) =>
                 ...additionalData,
             })
         } catch (error) {
-            console.log('error creating user: ', error.message);
+            throw error;
         }
     }
 
@@ -58,7 +58,7 @@ export const updateUserProfileDocument = async (userId, data) => {
             ...data,
         });
     } catch (error) {
-        console.log('something went wrong: ', error.message);
+        throw error;
     }
 }
 
