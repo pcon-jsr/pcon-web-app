@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    padding-bottom: 2rem;
+
+    .title {
+        color: $primary;
+    }
 
     .verification-card {
         margin-top: 2rem;
@@ -25,6 +30,12 @@
             color: $primary;
             margin: 0 5px 0 20px;
         }
+    }
+
+    .form-card {
+        width: 40rem;
+        max-width: 90vw;
+
     }
 
 }
