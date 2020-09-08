@@ -11,6 +11,7 @@ import AuthScreen from './screens/AuthScreen';
 import SplashScreen from './screens/SplashScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import InterviewsScreen from './screens/InterviewsScreen';
+import CreateInterviewScreen from './screens/CreateInterviewScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -51,39 +52,47 @@ function App() {
     );
   }
 
+  const commonRoutes = ([
+    <Route key={1} exact path={navigationRoutes.HOME}>
+      <HomeScreen />
+    </Route>,
+    <Route key={2} exact path={navigationRoutes.EVENTS}>
+
+    </Route>,
+    <Route key={3} exact path={navigationRoutes.PROJECTS}>
+
+    </Route>,
+    <Route key={4} exact path={navigationRoutes.ACHIEVEMENTS}>
+
+    </Route>,
+    <Route key={5} exact path={navigationRoutes.ALUMINI}>
+
+    </Route>,
+    <Route key={6} exact path={navigationRoutes.NOTIFICATIONS}>
+
+    </Route>,
+    <Route key={7} exact path={navigationRoutes.TEAM}>
+
+    </Route>,
+    <Route key={8} exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
+      <InterviewsScreen />
+    </Route>,
+    <Route key={9} exact path={navigationRoutes.GALLERY}>
+
+    </Route>,
+  ]);
+
+
   let routes;
   if (currentUser) {
     routes = (
       <Switch>
-        <Route exact path={navigationRoutes.HOME}>
-          <HomeScreen />
-        </Route>
+        {commonRoutes.map(route => route)}
         <Route exact path={navigationRoutes.PROFILE}>
           <ProfileScreen />
         </Route>
-        <Route exact path={navigationRoutes.EVENTS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.PROJECTS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.ACHIEVEMENTS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.ALUMINI}>
-
-        </Route>
-        <Route exact path={navigationRoutes.NOTIFICATIONS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.TEAM}>
-
-        </Route>
-        <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
-          <InterviewsScreen />
-        </Route>
-        <Route exact path={navigationRoutes.GALLERY}>
-
+        <Route exact path={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES}>
+          <CreateInterviewScreen />
         </Route>
         <Redirect to={navigationRoutes.HOME} />
       </Switch>
@@ -91,35 +100,9 @@ function App() {
   } else {
     routes = (
       <Switch>
-        <Route exact path={navigationRoutes.HOME}>
-          <HomeScreen />
-        </Route>
+        {commonRoutes.map(route => route)}
         <Route exact path={navigationRoutes.AUTH}>
           <AuthScreen />
-        </Route>
-        <Route exact path={navigationRoutes.EVENTS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.PROJECTS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.ACHIEVEMENTS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.ALUMINI}>
-
-        </Route>
-        <Route exact path={navigationRoutes.TEAM}>
-
-        </Route>
-        <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
-
-        </Route>
-        <Route exact path={navigationRoutes.NOTIFICATIONS}>
-
-        </Route>
-        <Route exact path={navigationRoutes.GALLERY}>
-
         </Route>
         <Redirect to={navigationRoutes.AUTH} />
       </Switch>
