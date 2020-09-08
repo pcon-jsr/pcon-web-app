@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import AuthScreen from './screens/AuthScreen';
 import SplashScreen from './screens/SplashScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import InterviewsScreen from './screens/InterviewsScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -79,7 +80,7 @@ function App() {
 
         </Route>
         <Route exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
-
+          <InterviewsScreen />
         </Route>
         <Route exact path={navigationRoutes.GALLERY}>
 

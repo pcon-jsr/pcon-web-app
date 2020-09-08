@@ -1,0 +1,13 @@
+.grid {
+    padding: 1rem;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto, minmax(20rem, 1fr));
+}
+
+@media (max-width: 768px) {
+    .grid {
+        padding: 0.6rem;
+    }
+}
