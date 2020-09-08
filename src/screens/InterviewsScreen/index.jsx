@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './index.module.scss';
 import Grid from '../../components/Grid';
 import Card from '../../components/Card';
+import { FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { navigationRoutes } from '../../navigation/routes';
 
 const InterviewsScreen = () => {
 
@@ -16,6 +19,9 @@ const InterviewsScreen = () => {
             <Grid className={styles['grid']}>
                 {renderedInterviews}
             </Grid>
+            <Link to={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES} className={styles['add-btn']}>
+                <FaPlus className={styles['icon']} />
+            </Link>
         </div>
     );
 };

@@ -12,7 +12,35 @@
         color: $primary;
     }
 
+    .add-btn {
+        text-decoration: none;
+        position: fixed;
+        top: 4.5rem;
+        right: 2rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        padding: 0;
+        transition: 0.15s ease-in-out;
+        overflow: hidden;
+        background-color: $primary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            box-shadow: 0px 0px 24px 2px $primary;
+        }
+
+        .icon {
+            color: #fff;
+            width: 60%;
+            height: 60%;
+        }
+    }
+
     .grid {
+        margin-top: 2rem;
         width: 95%;
         gap: 25px;
 
@@ -35,9 +63,19 @@
     .interviews-screen {
         min-height: calc(100vh - 8rem);
 
+        .add-btn {
+            position: fixed;
+            top: auto;
+            bottom: 5rem;
+            right: 1rem;
+            width: 4rem;
+            height: 4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        }
+
         .grid {
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-
+            margin-top: 0;
         }
     }
 }
