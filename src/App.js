@@ -52,7 +52,7 @@ function App() {
     );
   }
 
-  const commonRoutes = ([
+  const commonRoutes = [
     <Route key={1} exact path={navigationRoutes.HOME}>
       <HomeScreen />
     </Route>,
@@ -80,7 +80,7 @@ function App() {
     <Route key={9} exact path={navigationRoutes.GALLERY}>
 
     </Route>,
-  ]);
+  ];
 
 
   let routes;
