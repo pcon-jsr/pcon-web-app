@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './index.module.scss';
 import { AuthContext } from '../../contexts/auth-context';
 import { navigationRoutes } from '../../navigation/routes';
@@ -10,6 +11,7 @@ import CustomInput from '../../components/CustomInput';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { yearList } from '../../utils/yearList';
 import ErrorModal from '../../components/ErrorModal';
+import { createInterviewDocument } from '../../firebase/firebase.utils';
 
 const INITIAL_FORM_STATE = {
     inputs: {
@@ -42,11 +44,44 @@ const CreateInterviewScreen = () => {
     const { formState, inputHandler } = useForm(INITIAL_FORM_STATE);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const history = useHistory();
 
     const formSubmitHandler = async (event) => {
         event.preventDefault();
         setLoading(true);
-        console.log(formState);
+
+        const {
+            companyName,
+            year,
+            roundsDescription,
+            questionsDescription,
+            advice,
+        } = formState.inputs;
+
+        const interviewData = {
+            companyName: companyName.value,
+            year: year.value,
+            roundsDescription: roundsDescription.value,
+            questionsDescription: questionsDescription.value,
+            advice: advice.value,
+        };
+
+        const userData = {
+            id: auth.user.id,
+            name: auth.user.name,
+            email: auth.user.email,
+            branch: auth.user.branch,
+            registrationNum: auth.user.registrationNum,
+        };
+
+        try {
+            await createInterviewDocument(userData, interviewData);
+            setSuccess('Your Post is under review and once verified, it will be published!');
+        } catch (err) {
+            setError(err.message);
+        }
+
         setLoading(false);
     }
 
@@ -68,11 +103,21 @@ const CreateInterviewScreen = () => {
         setError('');
     }
 
+    const clearSuccessHandler = () => {
+        setSuccess('');
+        history.push(navigationRoutes.INTERVIEW_EXPERIENCES);
+    }
+
     return (
         <React.Fragment>
             <ErrorModal
                 error={error}
                 onClear={clearErrorHandler}
+            />
+            <ErrorModal
+                success
+                error={success}
+                onClear={clearSuccessHandler}
             />
             <div className={styles['create-interview-screen']}>
                 <h2 className={styles["title"]}>Share your Interview Experience</h2>

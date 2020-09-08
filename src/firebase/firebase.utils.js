@@ -62,4 +62,18 @@ export const updateUserProfileDocument = async (userId, data) => {
     }
 }
 
+export const createInterviewDocument = async (userData, interviewData) => {
+    const interviewsCollectionRef = firestore.collection('interviews');
+    const createdAt = new Date();
+    try {
+        await interviewsCollectionRef.add({
+            user: userData,
+            createdAt,
+            ...interviewData,
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
 export default firebase;
