@@ -93,13 +93,13 @@ function App() {
   if (currentUser) {
     routes = (
       <Switch>
-        {commonRoutes.map(route => route)}
         <Route exact path={navigationRoutes.PROFILE}>
           <ProfileScreen />
         </Route>
         <Route exact path={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES}>
           <CreateInterviewScreen />
         </Route>
+        {commonRoutes.map(route => route)}
         <Redirect to={navigationRoutes.HOME} />
       </Switch>
     );
