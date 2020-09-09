@@ -71,6 +71,7 @@ const CreateInterviewScreen = () => {
             id: auth.user.id,
             name: auth.user.name,
             email: auth.user.email,
+            photoURL: auth.user.photoURL,
             branch: auth.user.branch,
             registrationNum: auth.user.registrationNum,
         };
