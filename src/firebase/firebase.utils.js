@@ -9,8 +9,8 @@ const firebaseConfig = {
     projectId: "pcon-web-app",
     storageBucket: "pcon-web-app.appspot.com",
     messagingSenderId: "273625173285",
-    appId: "1:273625173285:web:ef80fa3180d23345b41ecc",
-    measurementId: "G-F7DRRTNFMN"
+    appId: "1:273625173285:web:b4c7f957baf786aeb41ecc",
+    measurementId: "G-B3BBQQ35Y3"
 };
 
 firebase.initializeApp(firebaseConfig);
