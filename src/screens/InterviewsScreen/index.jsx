@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './index.module.scss';
 import Grid from '../../components/Grid';
 import Card from '../../components/Card';
@@ -10,11 +10,12 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import Avatar from '../../components/Avatar';
 import CustomButton from '../../components/CustomButton';
 import { getLocalDateFromFirebaseTimestamp } from '../../utils/dates';
-
+import { AuthContext } from '../../contexts/auth-context';
 
 const InterviewsScreen = () => {
     const [interviews, setInterviews] = useState([]);
     const [loading, setLoading] = useState(true);
+    const auth = useContext(AuthContext);
 
     useEffect(() => {
         const unsubscribeInterviews = interviewsCollectionRef.where('verified', '==', true).onSnapshot(snapshot => {
@@ -63,9 +64,11 @@ const InterviewsScreen = () => {
             <Grid className={styles['grid']}>
                 {renderedInterviews}
             </Grid>
-            <Link to={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES} className={styles['add-btn']}>
-                <FaPlus className={styles['icon']} />
-            </Link>
+            {auth.user && (
+                <Link to={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES} className={styles['add-btn']}>
+                    <FaPlus className={styles['icon']} />
+                </Link>
+            )}
         </div>
     );
 };
