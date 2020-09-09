@@ -157,7 +157,7 @@ const CreateInterviewScreen = () => {
                             validators={[VALIDATOR_MINLENGTH(40), VALIDATOR_MAXLENGTH(600)]}
                             errorText={"Should be atleast 40 characters and atmost 600 characters"}
                             getInput={inputHandler}
-                            placeholder={`e.g:\n ${roundsSuggestion}`}
+                            placeholder={`SAMPLE TEXT:\n ${roundsSuggestion}`}
                         />
                         <CustomInput
                             element="textarea"
@@ -167,7 +167,7 @@ const CreateInterviewScreen = () => {
                             validators={[VALIDATOR_MINLENGTH(150), VALIDATOR_MAXLENGTH(2400)]}
                             errorText={"Should be atleast 150 characters and atmost 2400 characters"}
                             getInput={inputHandler}
-                            placeholder={`e.g:\n ${questionsSuggestion}`}
+                            placeholder={`SAMPLE TEXT:\n ${questionsSuggestion}`}
                         />
                         <CustomInput
                             element="textarea"
@@ -178,7 +178,7 @@ const CreateInterviewScreen = () => {
                             errorText={"Should be atmost 400 characters"}
                             getInput={inputHandler}
                             initialValidity={true}
-                            placeholder={`e.g:\n ${adviceSuggestion}`}
+                            placeholder={`SAMPLE TEXT:\n ${adviceSuggestion}`}
                         />
                         {!loading && (
                             <CustomButton type="submit" disabled={!formState.isValid}>
