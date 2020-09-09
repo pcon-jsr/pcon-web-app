@@ -62,8 +62,10 @@ export const updateUserProfileDocument = async (userId, data) => {
     }
 }
 
+export const interviewsCollectionRef = firestore.collection('interviews');
+
 export const createInterviewDocument = async (userData, interviewData) => {
-    const interviewsCollectionRef = firestore.collection('interviews');
+
     const createdAt = new Date();
     try {
         await interviewsCollectionRef.add({
