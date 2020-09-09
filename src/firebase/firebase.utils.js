@@ -78,4 +78,18 @@ export const createInterviewDocument = async (userData, interviewData) => {
     }
 }
 
+export const getInterviewDocument = async (interviewId) => {
+    const interviewRef = interviewsCollectionRef.doc(interviewId);
+
+    let interviewData = null;
+    try {
+        const snapshot = await interviewRef.get();
+        interviewData = snapshot.data();
+    } catch (error) {
+        throw error;
+    }
+
+    return interviewData;
+}
+
 export default firebase;

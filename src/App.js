@@ -13,6 +13,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import InterviewsScreen from './screens/InterviewsScreen';
 import CreateInterviewScreen from './screens/CreateInterviewScreen';
 import ErrorModal from './components/ErrorModal';
+import InterviewDetailScreen from './screens/InterviewDetailScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -79,7 +80,10 @@ function App() {
     <Route key={8} exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
       <InterviewsScreen />
     </Route>,
-    <Route key={9} exact path={navigationRoutes.GALLERY}>
+    <Route key={9} exact path={`${navigationRoutes.INTERVIEW_EXPERIENCES}/:interviewId`}>
+      <InterviewDetailScreen />
+    </Route>,
+    <Route key={10} exact path={navigationRoutes.GALLERY}>
 
     </Route>,
   ];
