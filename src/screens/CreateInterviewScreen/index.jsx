@@ -65,6 +65,7 @@ const CreateInterviewScreen = () => {
             roundsDescription: roundsDescription.value,
             questionsDescription: questionsDescription.value,
             advice: advice.value,
+            verified: false,
         };
 
         const userData = {
