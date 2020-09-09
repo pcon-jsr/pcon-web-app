@@ -75,6 +75,7 @@ const CustomInput = (props) => {
                 onChange={changeHandler}
                 onBlur={touchHandler}
                 value={inputState.value}
+                placeholder={props.placeholder}
             />
         );
     } else if (props.element === 'select') {
