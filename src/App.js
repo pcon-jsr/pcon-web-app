@@ -80,7 +80,10 @@ function App() {
     <Route key={8} exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
       <InterviewsScreen />
     </Route>,
-    <Route key={9} exact path={navigationRoutes.GALLERY}>
+    <Route key={9} exact path={`${navigationRoutes.INTERVIEW_EXPERIENCES}/:interviewId`}>
+      <InterviewDetailScreen />
+    </Route>,
+    <Route key={10} exact path={navigationRoutes.GALLERY}>
 
     </Route>,
   ];
@@ -96,9 +99,6 @@ function App() {
         <Route exact path={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES}>
           <CreateInterviewScreen />
         </Route>
-        <Route exact path={`${navigationRoutes.INTERVIEW_EXPERIENCES}/:interviewId`}>
-          <InterviewDetailScreen />
-        </Route>
         {commonRoutes.map(route => route)}
         <Redirect to={navigationRoutes.HOME} />
       </Switch>
@@ -106,10 +106,13 @@ function App() {
   } else {
     routes = (
       <Switch>
-        {commonRoutes.map(route => route)}
+        <Route exact path={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES} render={() => {
+          return <Redirect to={navigationRoutes.AUTH} />
+        }} />
         <Route exact path={navigationRoutes.AUTH}>
           <AuthScreen />
         </Route>
+        {commonRoutes.map(route => route)}
         <Redirect to={navigationRoutes.AUTH} />
       </Switch>
     );
