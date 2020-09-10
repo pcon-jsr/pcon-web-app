@@ -3,7 +3,7 @@ export const navigationRoutes = {
     EVENTS: '/events',
     AUTH: '/auth',
     PROFILE: '/profile',
-    ALUMINI: '/alumini',
+    ALUMNI: '/alumni',
     ACHIEVEMENTS: '/achievements',
     INTERVIEW_EXPERIENCES: '/interview_experiences',
     CREATE_INTERVIEW_EXPERIENCES: '/interview_experiences/create',

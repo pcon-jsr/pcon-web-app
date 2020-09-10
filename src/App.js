@@ -75,7 +75,7 @@ function App() {
     <Route key={4} exact path={navigationRoutes.ACHIEVEMENTS}>
 
     </Route>,
-    <Route key={5} exact path={navigationRoutes.ALUMINI}>
+    <Route key={5} exact path={navigationRoutes.ALUMNI}>
 
     </Route>,
     <Route key={6} exact path={navigationRoutes.NOTIFICATIONS}>

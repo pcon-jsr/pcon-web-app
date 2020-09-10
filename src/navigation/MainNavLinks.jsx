@@ -35,9 +35,9 @@ const MainNavLinks = () => {
                 </li>
                 <li>
 
-                    <NavLink exact to={navigationRoutes.ALUMINI} activeClassName={styles['active']}>
+                    <NavLink exact to={navigationRoutes.ALUMNI} activeClassName={styles['active']}>
                         <FaUserGraduate />
-                        <p>ALUMINI</p>
+                        <p>ALUMNI</p>
                     </NavLink>
                 </li>
             </ul>
