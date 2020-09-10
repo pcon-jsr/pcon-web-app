@@ -21,6 +21,7 @@ function App() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    let unsubscribeUserListener;
     const unsubscribeAuth = firebaseAuth.onAuthStateChanged(async userData => {
       if (userData) {
         const additionalData = {
@@ -31,7 +32,7 @@ function App() {
         };
         const userRef = await createUserProfileDocument(userData, additionalData);
 
-        userRef.onSnapshot(snapshot => {
+        unsubscribeUserListener = userRef.onSnapshot(snapshot => {
           setCurrentUser({
             id: snapshot.id,
             ...snapshot.data(),
@@ -41,11 +42,17 @@ function App() {
       } else {
         setCurrentUser(null);
         setCheckingAuthState(false);
+        if (typeof unsubscribeUserListener === 'function') {
+          unsubscribeUserListener();
+        }
       }
     });
 
     return () => {
       unsubscribeAuth();
+      if (typeof unsubscribeUserListener === 'function') {
+        unsubscribeUserListener();
+      }
     };
   }, []);
 
