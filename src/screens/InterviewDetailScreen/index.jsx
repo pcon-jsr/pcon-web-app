@@ -74,6 +74,7 @@ const InterviewDetailScreen = (props) => {
                 <Grid className={styles['grid']}>
                     <Card className={styles['company-card']}>
                         <h2>{interview.companyName}</h2>
+                        <h5>{interview.type}</h5>
                         <h4>{interview.year}</h4>
                     </Card>
                     <Card className={styles['author-card']}>
