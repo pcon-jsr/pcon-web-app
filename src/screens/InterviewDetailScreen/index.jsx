@@ -57,7 +57,7 @@ const InterviewDetailScreen = (props) => {
                     onClear={clearErrorHandler}
                 />
                 <div className={styles['interivew-detail-screen']} style={{ justifyContent: 'center' }}>
-                    <LoadingSpinner />
+                    <LoadingSpinner asOverlay />
                 </div>
             </React.Fragment>
         );

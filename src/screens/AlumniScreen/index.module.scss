@@ -1,0 +1,24 @@
+@import "../../styles/theme";
+
+.alumni-screen {
+    min-height: calc(100vh - 4rem);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .grid {
+        width: 100%;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .alumni-screen {
+        .add-btn {
+            top: 4.5rem;
+            right: 1rem;
+        }
+    }
+}

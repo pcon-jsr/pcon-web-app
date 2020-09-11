@@ -14,6 +14,7 @@ import InterviewsScreen from './screens/InterviewsScreen';
 import CreateInterviewScreen from './screens/CreateInterviewScreen';
 import ErrorModal from './components/ErrorModal';
 import InterviewDetailScreen from './screens/InterviewDetailScreen';
+import AlumniScreen from './screens/AlumniScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -76,7 +77,7 @@ function App() {
 
     </Route>,
     <Route key={5} exact path={navigationRoutes.ALUMNI}>
-
+      <AlumniScreen />
     </Route>,
     <Route key={6} exact path={navigationRoutes.NOTIFICATIONS}>
 
