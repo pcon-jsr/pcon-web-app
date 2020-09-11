@@ -95,5 +95,7 @@ export const getInterviewDocument = async (interviewId) => {
 }
 
 export const alumniRef = realTimeDB.ref().child('alumni');
+export const achievementsRef = realTimeDB.ref().child('achievements');
+
 
 export default firebase;
