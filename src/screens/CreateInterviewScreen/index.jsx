@@ -24,6 +24,10 @@ const INITIAL_FORM_STATE = {
             value: "",
             isValid: false,
         },
+        type: {
+            value: "",
+            isValid: false,
+        },
         roundsDescription: {
             value: "",
             isValid: false,
@@ -40,6 +44,17 @@ const INITIAL_FORM_STATE = {
     isValid: false,
 };
 
+const interviewType = [
+    {
+        key: 'FULL TIME',
+        value: 'FULL TIME'
+    },
+    {
+        key: 'INTERNSHIP',
+        value: 'INTERNSHIP'
+    },
+]
+
 const CreateInterviewScreen = () => {
     const auth = useContext(AuthContext);
     const { formState, inputHandler } = useForm(INITIAL_FORM_STATE);
@@ -55,6 +70,7 @@ const CreateInterviewScreen = () => {
         const {
             companyName,
             year,
+            type,
             roundsDescription,
             questionsDescription,
             advice,
@@ -63,6 +79,7 @@ const CreateInterviewScreen = () => {
         const interviewData = {
             companyName: companyName.value,
             year: year.value,
+            type: type.value,
             roundsDescription: roundsDescription.value,
             questionsDescription: questionsDescription.value,
             advice: advice.value,
@@ -147,6 +164,17 @@ const CreateInterviewScreen = () => {
                             getInput={inputHandler}
                             optionList={yearList}
                             initialValue={yearList[0].value}
+                            initialValidity={true}
+                        />
+                        <CustomInput
+                            element="select"
+                            id="type"
+                            label="Type"
+                            validators={[VALIDATOR_REQUIRE()]}
+                            errorText={"Required"}
+                            getInput={inputHandler}
+                            optionList={interviewType}
+                            initialValue={interviewType[0].value}
                             initialValidity={true}
                         />
                         <CustomInput
