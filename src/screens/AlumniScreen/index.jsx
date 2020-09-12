@@ -48,7 +48,7 @@ const AlumniScreen = () => {
 
     return (
         <div className={styles['alumni-screen']}>
-            <ScreenTitle>ALUMINI</ScreenTitle>
+            <ScreenTitle>ALUMNI</ScreenTitle>
             {loading && (
                 <LoadingSpinner asOverlay />
             )}
