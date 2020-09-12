@@ -53,6 +53,8 @@
                 width: 100%;
                 text-align: left;
                 color: $accent;
+                overflow-wrap: break-word;
+                white-space: pre-line;
             }
         }
     }
