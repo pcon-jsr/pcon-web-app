@@ -2,9 +2,8 @@ import React from 'react';
 import styles from './NavLinks.module.scss';
 import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import { SiMoleculer } from 'react-icons/si';
 import { BsFillStarFill, BsCalendarFill } from 'react-icons/bs';
-import { FaUserGraduate } from 'react-icons/fa';
+import { FaUserGraduate, FaUserTie } from 'react-icons/fa';
 
 import { navigationRoutes } from './routes';
 
@@ -19,11 +18,11 @@ const MainNavLinks = () => {
                     </NavLink>
                 </li>
                 <li>
-
-                    <NavLink exact to={navigationRoutes.PROJECTS} activeClassName={styles['active']}>
-                        <SiMoleculer />
-                        <p>PROJECTS</p>
+                    <NavLink exact to={navigationRoutes.INTERVIEW_EXPERIENCES} activeClassName={styles['active']}>
+                        <FaUserTie />
+                        <p>INTERVIEWS</p>
                     </NavLink>
+
                 </li>
                 <li>
 

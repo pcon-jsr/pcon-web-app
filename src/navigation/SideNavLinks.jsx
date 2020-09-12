@@ -2,10 +2,9 @@ import React from 'react';
 import styles from './SideNavLinks.module.scss';
 import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import { FaUserTie, FaGithub } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import { BsPeopleFill } from 'react-icons/bs';
-import { IoMdPhotos } from 'react-icons/io';
-import { SiSlack } from 'react-icons/si';
+import { SiSlack, SiMoleculer } from 'react-icons/si';
 
 import { navigationRoutes } from './routes';
 
@@ -14,11 +13,11 @@ const SideNavLinks = () => {
         <IconContext.Provider value={{ className: styles['icon'] }}>
             <ul className={`${styles['nav-links']}`}>
                 <li>
-                    <NavLink exact to={navigationRoutes.INTERVIEW_EXPERIENCES} activeClassName={styles['active']}>
-                        <FaUserTie />
-                        <p>INTERVIEW EXPERIENCES</p>
-                    </NavLink>
 
+                    <NavLink exact to={navigationRoutes.PROJECTS} activeClassName={styles['active']}>
+                        <SiMoleculer />
+                        <p>PROJECTS</p>
+                    </NavLink>
                 </li>
                 <li>
                     <NavLink exact to={navigationRoutes.TEAM} activeClassName={styles['active']}>
@@ -27,12 +26,12 @@ const SideNavLinks = () => {
                     </NavLink>
 
                 </li>
-                <li>
+                {/* <li>
                     <NavLink exact to={navigationRoutes.GALLERY} activeClassName={styles['active']}>
                         <IoMdPhotos />
                         <p>GALLERY</p>
                     </NavLink>
-                </li>
+                </li> */}
                 <li>
                     <a target="_blank" rel="noopener noreferrer" href={`https://github.com/pcon-jsr`}>
                         <FaGithub />
