@@ -73,7 +73,7 @@ const AchievementsScreen = () => {
         <div className={styles['achievements-screen']}>
             <ScreenTitle>ACHIEVEMENTS</ScreenTitle>
             {loading && (
-                <LoadingSpinner />
+                <LoadingSpinner asOverlay />
             )}
             {!loading && (
                 <Grid className={styles['grid']}>

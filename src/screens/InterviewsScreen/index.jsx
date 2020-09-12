@@ -59,7 +59,7 @@ const InterviewsScreen = () => {
     return (
         <div className={styles['interviews-screen']}>
             <h3 className={styles['screen-title']}>INTERVIEW EXPERIENCES</h3>
-            {loading && <LoadingSpinner />}
+            {loading && <LoadingSpinner asOverlay />}
             {!loading && !interviews.length && <h4>No interviews found!</h4>}
             <Grid className={styles['grid']}>
                 {renderedInterviews}
