@@ -16,6 +16,7 @@ import ErrorModal from './components/ErrorModal';
 import InterviewDetailScreen from './screens/InterviewDetailScreen';
 import AlumniScreen from './screens/AlumniScreen';
 import AchievementsScreen from './screens/AchievementsScreen';
+import EventsScreen from './screens/EventsScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -69,7 +70,7 @@ function App() {
       <HomeScreen />
     </Route>,
     <Route key={2} exact path={navigationRoutes.EVENTS}>
-
+      <EventsScreen />
     </Route>,
     <Route key={3} exact path={navigationRoutes.PROJECTS}>
 
