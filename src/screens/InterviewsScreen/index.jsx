@@ -18,7 +18,7 @@ const InterviewsScreen = () => {
     const auth = useContext(AuthContext);
 
     useEffect(() => {
-        const unsubscribeInterviews = interviewsCollectionRef.where('verified', '==', true).onSnapshot(snapshot => {
+        const unsubscribeInterviews = interviewsCollectionRef.where('verified', '==', true).orderBy('createdAt', "desc").onSnapshot(snapshot => {
             const interviewsList = snapshot.docs.map(interviewDoc => ({
                 id: interviewDoc.id,
                 ...interviewDoc.data(),
