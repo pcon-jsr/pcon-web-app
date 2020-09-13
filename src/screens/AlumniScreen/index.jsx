@@ -13,7 +13,9 @@ const isFromTechGiant = (alumn) => {
         'amazon',
         'goldman sachs',
         'ge healthcare',
-        'ge'
+        'ge',
+        'shopee',
+        `lowe's india`,
     ].includes(alumn.company.toLowerCase());
 }
 
