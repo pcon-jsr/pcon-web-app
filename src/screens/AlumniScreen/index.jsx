@@ -6,6 +6,34 @@ import AlumniCard from '../../components/AlumniCard';
 import { alumniRef } from '../../firebase/firebase.utils';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
+const isFromTechGiant = (alumn) => {
+    return [
+        'google',
+        'microsoft',
+        'amazon',
+        'goldman sachs',
+        'ge healthcare',
+        'ge'
+    ].includes(alumn.company.toLowerCase());
+}
+
+const compareAlumn = (alumn1, alumn2) => {
+
+    if (alumn1.batch === alumn2.batch) {
+        if (isFromTechGiant(alumn1) && isFromTechGiant(alumn2)) {
+            return (alumn1.name < alumn2.name ? -1 : 1);
+        } else if (isFromTechGiant(alumn1) && !isFromTechGiant(alumn2)) {
+            return -1;
+        } else if (!isFromTechGiant(alumn1) && isFromTechGiant(alumn2)) {
+            return 1;
+        } else {
+            return (alumn1.name < alumn2.name ? -1 : 1);
+        }
+    }
+
+    return (alumn1.batch - alumn2.batch);
+}
+
 const AlumniScreen = () => {
     const [alumniList, setAlumniList] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,6 +52,8 @@ const AlumniScreen = () => {
                         ...snapshot.val()
                     });
                 });
+
+                alumniData.sort(compareAlumn);
 
                 setAlumniList(alumniData);
                 setLoading(false);
