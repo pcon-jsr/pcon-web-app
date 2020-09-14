@@ -1,0 +1,60 @@
+@import "../../styles/theme";
+
+.team-screen {
+    min-height: calc(100vh - 4rem);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .add-btn {
+        text-decoration: none;
+        position: fixed;
+        top: 4.5rem;
+        right: 2rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        padding: 0;
+        transition: 0.15s ease-in-out;
+        overflow: hidden;
+        background-color: $primary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            box-shadow: 0px 0px 24px 2px $primary;
+        }
+
+        .icon {
+            color: #fff;
+            width: 60%;
+            height: 60%;
+        }
+    }
+
+    .grid-faculty {
+        // grid-template-columns: minmax(300px, 1fr);
+        justify-content: center;
+        width: 300px;
+        max-width: 100%;
+        gap: 25px;
+        margin-bottom: 3rem;
+    }
+
+    .grid {
+        width: 100%;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 645px) {
+    .team-screen {
+        .grid-faculty {
+            width: 600px;
+            max-width: 100%;
+        }
+    }
+}

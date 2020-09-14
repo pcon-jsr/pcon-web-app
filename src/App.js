@@ -17,6 +17,7 @@ import InterviewDetailScreen from './screens/InterviewDetailScreen';
 import AlumniScreen from './screens/AlumniScreen';
 import AchievementsScreen from './screens/AchievementsScreen';
 import EventsScreen from './screens/EventsScreen';
+import TeamScreen from './screens/TeamScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -85,7 +86,7 @@ function App() {
 
     </Route>,
     <Route key={7} exact path={navigationRoutes.TEAM}>
-
+      <TeamScreen />
     </Route>,
     <Route key={8} exact path={navigationRoutes.INTERVIEW_EXPERIENCES}>
       <InterviewsScreen />
