@@ -93,8 +93,14 @@ const AlumniScreen = () => {
 
     }, []);
 
+
+    const searchValue = formState.inputs.search.value.toLowerCase();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [searchValue]);
+
     const renderedCards = alumniList.filter(alumn => {
-        const searchValue = formState.inputs.search.value.toLowerCase();
+
         return (
             alumn.name.toLowerCase().includes(searchValue)
             || alumn.company.toLowerCase().includes(searchValue)
