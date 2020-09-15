@@ -7,6 +7,22 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
+
+    .search-card {
+        width: 30rem;
+        max-width: 95vw;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 4.5rem;
+        z-index: 4;
+        padding: 5px 10px;
+
+        .search-form {
+            margin: 0;
+        }
+    }
+
 
     .grid {
         width: 100%;
