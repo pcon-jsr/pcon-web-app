@@ -94,7 +94,7 @@ const AlumniScreen = () => {
     }, []);
 
 
-    const searchValue = formState.inputs.search.value.toLowerCase();
+    const searchValue = formState.inputs.search.value.trim().toLowerCase();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [searchValue]);
