@@ -33,11 +33,18 @@ export function register(config) {
 
     window.addEventListener('activate', function (event) {
       event.waitUntil(
-        caches.keys().then(function (names) {
-          for (let name of names)
-            caches.delete(name);
-        }).then(function () {
-          window.location.href = "./";
+        caches.keys().then(function (cacheNames) {
+          console.log('removing cache');
+          return Promise.all(
+            cacheNames.filter(function (cacheName) {
+              // Return true if you want to remove this cache,
+              // but remember that caches are shared across
+              // the whole origin
+              return true;
+            }).map(function (cacheName) {
+              return caches.delete(cacheName);
+            })
+          );
         })
       );
     });
