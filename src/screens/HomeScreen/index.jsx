@@ -14,7 +14,6 @@ const HomeScreen = () => {
                         <PconLogo className={styles['logo']} />
                     </div>
                     <div className={styles['text-container']}>
-                        <h2>ONLY FOR TESTING!</h2>
                         <h2>Programming Club of <span>NIT Jamshedpur</span></h2>
                         <ReactTypingEffect
                             className={styles['animated-text']}
