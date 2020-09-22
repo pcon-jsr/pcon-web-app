@@ -1,12 +1,5 @@
 {
-  "short_name": "PCON",
-  "name": "Programming Club of NIT Jamshedpur",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "windows10/Square71x71Logo.scale-400.png",
       "sizes": "284x284"
@@ -367,9 +360,5 @@
       "src": "firefox/firefox-general-16-16.png",
       "sizes": "16x16"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }
