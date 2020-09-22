@@ -31,6 +31,21 @@ export function register(config) {
       return;
     }
 
+    window.addEventListener('activate', function (event) {
+      event.waitUntil(
+        caches.keys().then(function (cacheNames) {
+          return Promise.all(
+            caches.keys().then(function (names) {
+              for (let name of names)
+                caches.delete(name);
+            }).then(function () {
+              window.location.href = "./";
+            })
+          );
+        })
+      );
+    });
+
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
