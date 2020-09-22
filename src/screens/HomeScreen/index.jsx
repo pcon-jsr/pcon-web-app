@@ -15,7 +15,7 @@ const HomeScreen = () => {
                     </div>
                     <div className={styles['text-container']}>
                         {/* <h2>For testing</h2> */}
-                        <h2>Programming Club of <span>NIT Jsr</span></h2>
+                        <h2>Programming Club of <span>NIT Jamshedpur</span></h2>
                         <ReactTypingEffect
                             className={styles['animated-text']}
                             eraseDelay={1000}
