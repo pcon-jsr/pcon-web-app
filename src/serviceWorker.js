@@ -33,15 +33,11 @@ export function register(config) {
 
     window.addEventListener('activate', function (event) {
       event.waitUntil(
-        caches.keys().then(function (cacheNames) {
-          return Promise.all(
-            caches.keys().then(function (names) {
-              for (let name of names)
-                caches.delete(name);
-            }).then(function () {
-              window.location.href = "./";
-            })
-          );
+        caches.keys().then(function (names) {
+          for (let name of names)
+            caches.delete(name);
+        }).then(function () {
+          window.location.href = "./";
         })
       );
     });
