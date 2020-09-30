@@ -18,6 +18,7 @@ import AlumniScreen from './screens/AlumniScreen';
 import AchievementsScreen from './screens/AchievementsScreen';
 import EventsScreen from './screens/EventsScreen';
 import TeamScreen from './screens/TeamScreen';
+import ProjectsScreen from './screens/ProjectsScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -74,7 +75,7 @@ function App() {
       <EventsScreen />
     </Route>,
     <Route key={3} exact path={navigationRoutes.PROJECTS}>
-
+      <ProjectsScreen />
     </Route>,
     <Route key={4} exact path={navigationRoutes.ACHIEVEMENTS}>
       <AchievementsScreen />
