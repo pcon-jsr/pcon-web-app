@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch, useHistory } from 'react-router-dom';
 
 import { firebaseAuth, createUserProfileDocument } from './firebase/firebase.utils';
 import { AuthContext } from './contexts';
@@ -24,6 +24,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [checkingAuthState, setCheckingAuthState] = useState(true);
   const [error, setError] = useState('');
+  const browserHistory = useHistory();
+
 
   useEffect(() => {
     let unsubscribeUserListener;
@@ -59,6 +61,13 @@ function App() {
         unsubscribeUserListener();
       }
     };
+  }, []);
+
+  useEffect(() => {
+    browserHistory.listen((location, action) => {
+      window.scrollTo(0,0);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (checkingAuthState) {
@@ -146,12 +155,10 @@ function App() {
             user: currentUser
           }}
         >
-          <Router>
             <MainNavigation />
             <main>
               {routes}
             </main>
-          </Router>
         </AuthContext.Provider>
       </div>
     </React.Fragment>
