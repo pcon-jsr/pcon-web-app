@@ -19,6 +19,7 @@ import AchievementsScreen from './screens/AchievementsScreen';
 import EventsScreen from './screens/EventsScreen';
 import TeamScreen from './screens/TeamScreen';
 import ProjectsScreen from './screens/ProjectsScreen';
+import NotificationsScreen from './screens/NotificationsScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -65,9 +66,9 @@ function App() {
 
   useEffect(() => {
     browserHistory.listen((location, action) => {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (checkingAuthState) {
@@ -93,7 +94,7 @@ function App() {
       <AlumniScreen />
     </Route>,
     <Route key={6} exact path={navigationRoutes.NOTIFICATIONS}>
-
+      <NotificationsScreen />
     </Route>,
     <Route key={7} exact path={navigationRoutes.TEAM}>
       <TeamScreen />
@@ -155,10 +156,10 @@ function App() {
             user: currentUser
           }}
         >
-            <MainNavigation />
-            <main>
-              {routes}
-            </main>
+          <MainNavigation />
+          <main>
+            {routes}
+          </main>
         </AuthContext.Provider>
       </div>
     </React.Fragment>
