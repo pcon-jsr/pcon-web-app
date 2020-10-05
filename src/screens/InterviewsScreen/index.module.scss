@@ -7,22 +7,39 @@
     justify-content: flex-start;
     align-items: center;
 
-
     .screen-title {
         color: $primary;
     }
 
+
+
     .search-card {
         width: 30rem;
-        max-width: 95vw;
-        position: sticky;
-        position: -webkit-sticky;
-        top: 4.5rem;
-        z-index: 4;
+        max-width: 90vw;
+
         padding: 5px 10px;
 
         .search-form {
             margin: 0;
+
+            .search-input {
+                transition: 0.2s ease;
+
+                &.fixed {
+                    width: 30rem;
+                    max-width: 95vw;
+                    padding: 1rem;
+                    top: 4rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    position: fixed;
+                    z-index: 4;
+                    background-color: white;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+                }
+
+            }
 
             .toggle-input {
                 margin: 10px 0;

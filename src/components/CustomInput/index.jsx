@@ -98,7 +98,7 @@ const CustomInput = (props) => {
     }
 
     return (
-        <div className={`${styles['form-control']} ${!inputState.isValid && inputState.isTouched && styles['form-control--invalid']}`}>
+        <div className={`${styles['form-control']} ${props.className} ${!inputState.isValid && inputState.isTouched && styles['form-control--invalid']}`}>
             <label htmlFor={props.id}>{props.label}</label>
             {element}
             {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}

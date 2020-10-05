@@ -32,6 +32,7 @@ const InterviewsScreen = () => {
     const { formState, inputHandler } = useForm(INITIAL_SEARCH_STATE);
     const [onlyInternship, setOnlyInternship] = useState(true);
     const [onlyFullTime, setOnlyFullTime] = useState(true);
+    const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
         const unsubscribeInterviews = interviewsCollectionRef.where('verified', '==', true).orderBy('createdAt', "desc").onSnapshot(snapshot => {
@@ -90,11 +91,36 @@ const InterviewsScreen = () => {
             </Card>
         );
     });
+
+    useEffect(() => {
+        const onScroll = () => {
+            setScrollY(window.scrollY);
+        }
+        window.addEventListener('scroll', onScroll);
+
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
     return (
         <div className={styles['interviews-screen']}>
             <h3 className={styles['screen-title']}>INTERVIEW EXPERIENCES</h3>
             {loading && <LoadingSpinner asOverlay />}
             {!loading && !interviews.length && <h4>No interviews found!</h4>}
+            {/* {!loading && (scrollY > 250) && (
+                <CustomInput
+                    id="search"
+                    type="text"
+                    label="Search"
+                    validators={[]}
+                    getInput={inputHandler}
+                    placeholder={`search by name or company`}
+                    initialValidity={true}
+                    initialValue={formState.inputs.search.value}
+                    className={`${styles['search-input-fixed']}`}
+                />
+            )} */}
             {!loading && interviews.length > 0 && (
                 <Card className={styles['search-card']}>
                     <form className={styles['search-form']}>
@@ -106,6 +132,8 @@ const InterviewsScreen = () => {
                             getInput={inputHandler}
                             placeholder={`search by name or company`}
                             initialValidity={true}
+                            initialValue={formState.inputs.search.value}
+                            className={`${styles['search-input']} ${(scrollY > 250) && styles['fixed']}`}
                         />
                         <div className={styles['toggle-input']}>
                             <label>FULL TIME</label>

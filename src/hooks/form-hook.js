@@ -2,6 +2,7 @@ import { useReducer, useCallback } from 'react';
 
 const formActionTypes = {
     INPUT_CHANGE: 'INPUT_CHANGE',
+    SET_DATA: 'SET_DATA',
 }
 
 const formReducer = (state, action) => {
@@ -24,6 +25,8 @@ const formReducer = (state, action) => {
                 isValid: formIsValid,
             };
 
+        case formActionTypes.SET_DATA:
+            return action.formData;
         default:
             return state;
     }
@@ -41,8 +44,17 @@ export const useForm = (INITIAL_FORM_STATE) => {
         });
     }, []);
 
+    const setFormDataHandler = useCallback((formStateData) => {
+        const setDataAction = {
+            type: formActionTypes.SET_DATA,
+            formData: formStateData,
+        };
+        dispatch(setDataAction);
+    }, []);
+
     return {
         formState,
         inputHandler,
+        setFormDataHandler,
     };
 }
