@@ -94,6 +94,8 @@ const CreateInterviewScreen = () => {
             photoURL: auth.user.photoURL,
             branch: auth.user.branch,
             registrationNum: auth.user.registrationNum,
+            githubHandle: auth.user.githubHandle || '',
+            linkedinURL: auth.user.linkedinURL || '',
         };
 
         try {

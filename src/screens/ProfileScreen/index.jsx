@@ -9,10 +9,11 @@ import { AuthContext } from "../../contexts";
 
 import {
     firebaseAuth,
+    updateUserDetailsInInterviewDocument,
     updateUserProfileDocument,
 } from "../../firebase/firebase.utils";
 
-import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from "../../utils/validators";
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH, VALIDATOR_URL } from "../../utils/validators";
 import { useForm } from "../../hooks/form-hook";
 import { branchList } from './branchList';
 import Card from "../../components/Card";
@@ -22,7 +23,7 @@ import CustomInput from "../../components/CustomInput";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorModal from "../../components/ErrorModal";
 
-const INITIAL_FORM_STATE = {
+const INITIAL_VERIFICATION_FORM_STATE = {
     inputs: {
         registrationNum: {
             value: "",
@@ -32,15 +33,39 @@ const INITIAL_FORM_STATE = {
             value: "",
             isValid: false,
         },
+        githubHandle: {
+            value: "",
+            isValid: false,
+        },
+        linkedinURL: {
+            value: "",
+            isValid: false,
+        },
     },
     isValid: false,
 };
 
+const INITIAL_USER_DETAIL_UPDATE_FORM_STATE = {
+    inputs: {
+        githubHandle: {
+            value: "",
+            isValid: false,
+        },
+        linkedinURL: {
+            value: "",
+            isValid: false,
+        },
+    },
+    isValid: false,
+}
+
 const ProfileScreen = () => {
     const auth = useContext(AuthContext);
-    const { formState, inputHandler } = useForm(INITIAL_FORM_STATE);
+    const verificationForm = useForm(INITIAL_VERIFICATION_FORM_STATE);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const detailsUpdateForm = useForm(INITIAL_USER_DETAIL_UPDATE_FORM_STATE);
+    const [success, setSuccess] = useState('');
 
     const logoutHandler = () => {
         firebaseAuth.signOut();
@@ -49,7 +74,7 @@ const ProfileScreen = () => {
     const verificationFormSubmitHandler = async (event) => {
         event.preventDefault();
 
-        const { branch, registrationNum } = formState.inputs;
+        const { branch, registrationNum, githubHandle, linkedinURL } = verificationForm.formState.inputs;
 
         setLoading(true);
 
@@ -57,8 +82,45 @@ const ProfileScreen = () => {
             await updateUserProfileDocument(user.id, {
                 branch: branch.value,
                 registrationNum: registrationNum.value?.toUpperCase(),
+                githubHandle: githubHandle.value,
+                linkedinURL: linkedinURL.value,
                 appliedForVerification: true,
             });
+        } catch (err) {
+            setError(err.message);
+        }
+
+        setLoading(false);
+    };
+
+    const detailsUpdateFormSubmitHandler = async (event) => {
+        event.preventDefault();
+
+        const { githubHandle, linkedinURL } = detailsUpdateForm.formState.inputs;
+
+        setLoading(true);
+
+        try {
+            await updateUserProfileDocument(user.id, {
+                githubHandle: githubHandle.value,
+                linkedinURL: linkedinURL.value,
+            });
+
+            const updatedUserData = {
+                ...user,
+                githubHandle: githubHandle.value,
+                linkedinURL: linkedinURL.value,
+            };
+
+            delete updatedUserData.verified;
+            delete updatedUserData.appliedForVerification;
+            delete updatedUserData.createdAt;
+
+            await updateUserDetailsInInterviewDocument(user.id, {
+                ...updatedUserData,
+            });
+
+            setSuccess('Details Updated!');
         } catch (err) {
             setError(err.message);
         }
@@ -73,9 +135,39 @@ const ProfileScreen = () => {
     if (user.verified) {
         verificationContent = (
             <Card className={styles["verified-card"]}>
-
                 <GoVerified className={styles["icon"]} />
-                <h1>You are a Verified User !</h1>
+                <h1>You're a Verified User !</h1>
+                <h3>Update Details</h3>
+                <form onSubmit={detailsUpdateFormSubmitHandler} className={styles['details-update-form']}>
+                    <CustomInput
+                        id="githubHandle"
+                        type="text"
+                        label="Github Username (Only username, NOT the url)"
+                        validators={[VALIDATOR_REQUIRE()]}
+                        errorText={"Required"}
+                        getInput={detailsUpdateForm.inputHandler}
+                        initialValue={user.githubHandle}
+                        initialValidity={!!user.githubHandle}
+                    />
+                    <CustomInput
+                        id="linkedinURL"
+                        type="text"
+                        label="Linkedin Profile URL"
+                        validators={[VALIDATOR_URL()]}
+                        errorText={"Invalid URL"}
+                        getInput={detailsUpdateForm.inputHandler}
+                        initialValue={user.linkedinURL}
+                        initialValidity={!!user.linkedinURL}
+                    />
+                    {!loading && (
+                        <CustomButton type="submit" disabled={!detailsUpdateForm.formState.isValid}>
+                            UPDATE
+                        </CustomButton>
+                    )}
+                    {
+                        loading && (<LoadingSpinner/>)
+                    }
+                </form>
             </Card>
         );
     } else if (!user.verified && !user.appliedForVerification) {
@@ -95,7 +187,7 @@ const ProfileScreen = () => {
                         label="College Registration Number"
                         validators={[VALIDATOR_MINLENGTH(10)]}
                         errorText={"Should be atleast 10 characters"}
-                        getInput={inputHandler}
+                        getInput={verificationForm.inputHandler}
                     />
                     <CustomInput
                         element="select"
@@ -103,14 +195,29 @@ const ProfileScreen = () => {
                         label="Branch"
                         validators={[VALIDATOR_REQUIRE()]}
                         errorText={"Required"}
-                        getInput={inputHandler}
+                        getInput={verificationForm.inputHandler}
                         optionList={branchList}
                         initialValue={branchList[0].value}
                         initialValidity={true}
                     />
+                    <CustomInput
+                        id="githubHandle"
+                        type="text"
+                        label="Github Username (Only username, NOT the url)"
+                        validators={[VALIDATOR_REQUIRE()]}
+                        errorText={"Required"}
+                        getInput={verificationForm.inputHandler}
+                    />
+                    <CustomInput
+                        id="linkedinURL"
+                        type="text"
+                        label="Linkedin Profile URL"
+                        validators={[VALIDATOR_URL()]}
+                        errorText={"Invalid URL"}
+                        getInput={verificationForm.inputHandler}
+                    />
                     {!loading && (
-                        <CustomButton type="submit" disabled={!formState.isValid}>
-
+                        <CustomButton type="submit" disabled={!verificationForm.formState.isValid}>
                             SUBMIT
                         </CustomButton>
                     )}
@@ -133,11 +240,20 @@ const ProfileScreen = () => {
         setError('');
     }
 
+    const clearSuccessHandler = () => {
+        setSuccess('');
+    }
+
     return (
         <React.Fragment>
             <ErrorModal
                 error={error}
                 onClear={clearErrorHandler}
+            />
+            <ErrorModal
+                success
+                error={success}
+                onClear={clearSuccessHandler}
             />
             <div className={styles["profile-screen"]}>
                 <CustomButton className={styles["logout-btn"]} onClick={logoutHandler}>

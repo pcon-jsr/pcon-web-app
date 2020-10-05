@@ -12,6 +12,7 @@ import { AuthContext } from '../../contexts/auth-context';
 import CustomButton from '../../components/CustomButton';
 import { navigationRoutes } from '../../navigation/routes';
 import ScreenTitle from '../../components/ScreenTitle';
+import { GrGithub, GrLinkedin } from 'react-icons/gr';
 
 const InterviewDetailScreen = (props) => {
     const [interview, setInterview] = useState(null);
@@ -92,6 +93,32 @@ const InterviewDetailScreen = (props) => {
                                 <span>{interview.user.email}</span>
                                 <span>{interview.user.registrationNum}</span>
                                 <span>{interview.user.branch}</span>
+                                <div className={styles['social-links']}>
+                                    {
+                                        interview.user.githubHandle && (
+                                            <a target="_blank" rel="noopener noreferrer" href={`https://github.com/${interview.user.githubHandle}`}>
+                                                <GrGithub className={styles['github']} />
+                                            </a>
+                                        )
+                                    }
+                                    {
+                                        interview.user.linkedinURL && (
+                                            <a target="_blank" rel="noopener noreferrer" href={`${interview.user.linkedinURL}`}>
+                                                <GrLinkedin className={styles['linkedin']} />
+                                            </a>
+                                        )
+                                    }
+                                </div>
+                                {
+                                    auth.user && auth.user.id === interview.user.id && !interview.user.githubHandle && !interview.user.linkedinURL && (
+                                        <div className={styles['alert']}>
+                                            <p>Update your profile to connect linkedin and github account</p>
+                                            <CustomButton to={navigationRoutes.PROFILE}>
+                                                UPDATE
+                                            </CustomButton>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </Card>

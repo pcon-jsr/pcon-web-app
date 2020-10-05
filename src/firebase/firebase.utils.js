@@ -108,6 +108,25 @@ export const updateInterviewDocument = async (interviewId, userData, interviewDa
     }
 }
 
+export const updateUserDetailsInInterviewDocument = async (userId, userDataUpdated) => {
+
+    try {
+
+        const userInterviewDocs = await interviewsCollectionRef.where('user.id', '==', userId).get();
+
+        userInterviewDocs.docs.forEach(async doc => {
+            if (doc.exists) {
+                await doc.ref.update({
+                    user: userDataUpdated,
+                });
+            }
+        });
+        
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const alumniRef = realTimeDB.ref().child('alumni');
 export const achievementsRef = realTimeDB.ref().child('achievements');
 export const eventsRef = realTimeDB.ref().child('events');
