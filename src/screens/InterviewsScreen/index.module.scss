@@ -88,6 +88,7 @@
         margin-top: 2rem;
         width: 95%;
         gap: 25px;
+        
 
         .interview-card {
             height: 22rem;
@@ -205,6 +206,7 @@
         .grid {
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             margin-top: 0;
+            margin-bottom: 7rem;
         }
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from './index.module.scss';
 import { withRouter } from 'react-router-dom';
 import { getInterviewDocument } from '../../firebase/firebase.utils';
@@ -8,11 +8,16 @@ import Card from '../../components/Card';
 import { getLocalDateFromFirebaseTimestamp } from '../../utils/dates';
 import Avatar from '../../components/Avatar';
 import ErrorModal from '../../components/ErrorModal';
+import { AuthContext } from '../../contexts/auth-context';
+import CustomButton from '../../components/CustomButton';
+import { navigationRoutes } from '../../navigation/routes';
+import ScreenTitle from '../../components/ScreenTitle';
 
 const InterviewDetailScreen = (props) => {
     const [interview, setInterview] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const auth = useContext(AuthContext);
 
     const interviewId = props.match.params.interviewId;
     useEffect(() => {
@@ -70,7 +75,7 @@ const InterviewDetailScreen = (props) => {
                 onClear={clearErrorHandler}
             />
             <div className={styles['interivew-detail-screen']}>
-                <h3>INTERVIEW EXPERIENCE</h3>
+                <ScreenTitle>INTERVIEW EXPERIENCE</ScreenTitle>
                 <Grid className={styles['grid']}>
                     <Card className={styles['company-card']}>
                         <h2>{interview.companyName}</h2>
@@ -109,6 +114,13 @@ const InterviewDetailScreen = (props) => {
                         <p className={styles['answer']}>{interview.advice || `No specific advice`}</p>
                     </Card>
                 </Grid>
+                {
+                    auth.user && auth.user.id === interview.user.id && (
+                        <CustomButton to={`${navigationRoutes.EDIT_INTERVIEW}/${interviewId}`}>
+                            EDIT
+                        </CustomButton>
+                    )
+                }
             </div>
         </React.Fragment>
     );

@@ -20,6 +20,7 @@ import EventsScreen from './screens/EventsScreen';
 import TeamScreen from './screens/TeamScreen';
 import ProjectsScreen from './screens/ProjectsScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
+import EditInterviewScreen from './screens/EditInterviewScreen';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -120,6 +121,9 @@ function App() {
         </Route>
         <Route exact path={navigationRoutes.CREATE_INTERVIEW_EXPERIENCES}>
           <CreateInterviewScreen />
+        </Route>
+        <Route exact path={`${navigationRoutes.EDIT_INTERVIEW}/:interviewId`}>
+          <EditInterviewScreen />
         </Route>
         {commonRoutes.map(route => route)}
         <Redirect to={navigationRoutes.HOME} />

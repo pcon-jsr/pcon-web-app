@@ -94,6 +94,20 @@ export const getInterviewDocument = async (interviewId) => {
     return interviewData;
 }
 
+export const updateInterviewDocument = async (interviewId, userData, interviewData) => {
+
+    const createdAt = new Date();
+    try {
+        await interviewsCollectionRef.doc(interviewId).set({
+            user: userData,
+            createdAt,
+            ...interviewData,
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const alumniRef = realTimeDB.ref().child('alumni');
 export const achievementsRef = realTimeDB.ref().child('achievements');
 export const eventsRef = realTimeDB.ref().child('events');

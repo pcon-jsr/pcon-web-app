@@ -11,4 +11,5 @@ export const navigationRoutes = {
     TEAM: '/team',
     NOTIFICATIONS: '/notifications',
     PROJECTS: '/projects',
+    EDIT_INTERVIEW: '/interview_experiences/edit',
 };

@@ -1,0 +1,21 @@
+@import "../../styles/theme";
+
+.edit-interview-screen {
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 2rem;
+
+    .title {
+        color: $primary;
+    }
+
+    .form-card {
+        width: 40rem;
+        max-width: 90vw;
+
+    }
+
+}

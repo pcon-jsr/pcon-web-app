@@ -13,6 +13,7 @@ import { yearList } from '../../utils/yearList';
 import ErrorModal from '../../components/ErrorModal';
 import { createInterviewDocument } from '../../firebase/firebase.utils';
 import { roundsSuggestion, questionsSuggestion, adviceSuggestion } from './suggestionTexts';
+import ScreenTitle from '../../components/ScreenTitle';
 
 const INITIAL_FORM_STATE = {
     inputs: {
@@ -140,7 +141,7 @@ const CreateInterviewScreen = () => {
                 onClear={clearSuccessHandler}
             />
             <div className={styles['create-interview-screen']}>
-                <h2 className={styles["title"]}>Share your Interview Experience</h2>
+                <ScreenTitle>SHARE YOUR INTERVIEW EXPERIENCE</ScreenTitle>
                 <Card className={styles["form-card"]}>
                     <form
                         onSubmit={formSubmitHandler}

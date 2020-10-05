@@ -33,9 +33,10 @@ const InterviewsScreen = () => {
     const [onlyInternship, setOnlyInternship] = useState(true);
     const [onlyFullTime, setOnlyFullTime] = useState(true);
     const [scrollY, setScrollY] = useState(0);
+    const [onlyMine, setOnlyMine] = useState(false);
 
     useEffect(() => {
-        const unsubscribeInterviews = interviewsCollectionRef.where('verified', '==', true).orderBy('createdAt', "desc").onSnapshot(snapshot => {
+        const unsubscribeInterviews = interviewsCollectionRef.where("verified", "==", true).orderBy('createdAt', "desc").onSnapshot(snapshot => {
             const interviewsList = snapshot.docs.map(interviewDoc => ({
                 id: interviewDoc.id,
                 ...interviewDoc.data(),
@@ -66,6 +67,8 @@ const InterviewsScreen = () => {
                 ) || (
                     interview.type === 'INTERNSHIP' && onlyInternship
                 )
+            ) && (
+                onlyMine ? onlyMine && interview.user.id === auth.user.id : true
             );
     }).map(interview => {
         const localDate = getLocalDateFromFirebaseTimestamp(interview.createdAt);
@@ -87,6 +90,13 @@ const InterviewsScreen = () => {
                     <CustomButton to={`${navigationRoutes.INTERVIEW_EXPERIENCES}/${interview.id}`}>
                         VIEW
                     </CustomButton>
+                    {
+                        auth.user && auth.user.id === interview.user.id && (
+                            <CustomButton to={`${navigationRoutes.EDIT_INTERVIEW}/${interview.id}`}>
+                                EDIT
+                            </CustomButton>
+                        )
+                    }
                 </div>
             </Card>
         );
@@ -108,19 +118,6 @@ const InterviewsScreen = () => {
             <h3 className={styles['screen-title']}>INTERVIEW EXPERIENCES</h3>
             {loading && <LoadingSpinner asOverlay />}
             {!loading && !interviews.length && <h4>No interviews found!</h4>}
-            {/* {!loading && (scrollY > 250) && (
-                <CustomInput
-                    id="search"
-                    type="text"
-                    label="Search"
-                    validators={[]}
-                    getInput={inputHandler}
-                    placeholder={`search by name or company`}
-                    initialValidity={true}
-                    initialValue={formState.inputs.search.value}
-                    className={`${styles['search-input-fixed']}`}
-                />
-            )} */}
             {!loading && interviews.length > 0 && (
                 <Card className={styles['search-card']}>
                     <form className={styles['search-form']}>
@@ -133,7 +130,7 @@ const InterviewsScreen = () => {
                             placeholder={`search by name or company`}
                             initialValidity={true}
                             initialValue={formState.inputs.search.value}
-                            className={`${styles['search-input']} ${(scrollY > 250) && styles['fixed']}`}
+                            className={`${styles['search-input']} ${(scrollY > 200) && styles['fixed']}`}
                         />
                         <div className={styles['toggle-input']}>
                             <label>FULL TIME</label>
@@ -181,6 +178,33 @@ const InterviewsScreen = () => {
                                 }}
                             />
                         </div>
+                        {
+                            auth.user && (
+                                <div className={styles['toggle-input']}>
+                                    <label>MY EXPERIENCES</label>
+                                    <ToggleButton
+                                        colors={{
+                                            activeThumb: {
+                                                base: '#fff',
+                                            },
+                                            inactiveThumb: {
+                                                base: '#fff',
+                                            },
+                                            active: {
+                                                base: '#02aca6',
+                                            },
+                                            inactive: {
+                                                base: '#4A4A4C',
+                                            }
+                                        }}
+                                        value={onlyMine || false}
+                                        onToggle={(value) => {
+                                            setOnlyMine(!value);
+                                        }}
+                                    />
+                                </div>
+                            )
+                        }
                     </form>
                 </Card>
             )}
