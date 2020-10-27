@@ -15,6 +15,40 @@ import CustomInput from '../../components/CustomInput';
 import { useForm } from '../../hooks/form-hook';
 import ToggleButton from 'react-toggle-button';
 
+// const companyRankMap = {
+//     'google': 1,
+//     'microsoft': 2,
+//     'amazon': 3,
+//     'goldman sachs': 4,
+//     'arcesium': 5,
+//     'ge': 6,
+//     'ge healthcare': 7,
+//     'shopee': 8,
+//     "lowe's india": 9,
+//     'samsung': 10,
+// }
+
+// const compareByCompany = (company1, company2) => {
+//     if (companyRankMap[company1] && companyRankMap[company2]) {
+//         return companyRankMap[company1] - companyRankMap[company2];
+//     } else if (companyRankMap[company1]) {
+//         return -1;
+//     } else if (companyRankMap[company2]) {
+//         return 1;
+//     } else {
+//         return (company1 < company2 ? -1 : 1);
+//     }
+// }
+
+// const compareInterviews = (interview1, interview2) => {
+//     // if (interview1.year === interview2.year) {
+//     //     return compareByCompany(interview1.companyName, interview2.companyName);
+//     // }
+
+//     // return interview1.year > interview2.year ? -1 : 1;
+//     return compareByCompany(interview1.companyName, interview2.companyName);
+// }
+
 const INITIAL_SEARCH_STATE = {
     inputs: {
         search: {
@@ -42,6 +76,7 @@ const InterviewsScreen = () => {
                 ...interviewDoc.data(),
             }));
 
+            // interviewsList.sort(compareInterviews);
             setInterviews(interviewsList);
             setLoading(false);
         });

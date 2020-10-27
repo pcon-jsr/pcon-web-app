@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Linkify from 'react-linkify';
 import styles from './index.module.scss';
 import ScreenTitle from '../../components/ScreenTitle';
 import Grid from '../../components/Grid';
@@ -43,14 +44,16 @@ const EventsScreen = () => {
     const renderedCards = events.map(ev => {
         return (
             <Card key={ev.id} className={styles['event-card']}>
-                <h3 className={styles['title']}>{ev.title}</h3>
-                <div className={styles['info']}>
-                    <span className={styles['date']}>{ev.month} {ev.year}</span>
-                </div>
-                <p className={styles['content']}>{ev.content}</p>
-                <a target="_blank" rel="noopener noreferrer" href={ev.link}>
-                    <CustomButton>VIEW MORE</CustomButton>
-                </a>
+                <Linkify>
+                    <h3 className={styles['title']}>{ev.title}</h3>
+                    <div className={styles['info']}>
+                        <span className={styles['date']}>{ev.month} {ev.year}</span>
+                    </div>
+                    <p className={styles['content']}>{ev.content}</p>
+                    <a target="_blank" rel="noopener noreferrer" href={ev.link}>
+                        <CustomButton>VIEW MORE</CustomButton>
+                    </a>
+                </Linkify>
             </Card>
         );
     });

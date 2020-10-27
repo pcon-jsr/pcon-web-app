@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Linkify from 'react-linkify';
 import styles from './index.module.scss';
 
 import ScreenTitle from '../../components/ScreenTitle';
@@ -65,9 +66,11 @@ const NotificationsScreen = () => {
         });
         return (
             <Card key={notification.id} className={styles['notification-card']}>
-                <h4>{notification.title}</h4>
-                <small>{localDateString}</small>
-                <p>{notification.content}</p>
+                <Linkify>
+                    <h4>{notification.title}</h4>
+                    <small>{localDateString}</small>
+                    <p>{notification.content}</p>
+                </Linkify>
             </Card>
         );
     });
