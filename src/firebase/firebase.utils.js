@@ -19,7 +19,9 @@ firebase.initializeApp(firebaseConfig);
 export const firebaseAuth = firebase.auth();
 firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 export const firestore = firebase.firestore();
+firestore.enablePersistence();
 export const realTimeDB = firebase.database();
+realTimeDB.goOffline();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ 'prompt': 'select_account' });
