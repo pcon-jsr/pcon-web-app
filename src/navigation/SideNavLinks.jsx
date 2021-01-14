@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SideNavLinks.module.scss';
 import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub,FaCalendar } from 'react-icons/fa';
 import { BsPeopleFill } from 'react-icons/bs';
 import { SiSlack, SiMoleculer } from 'react-icons/si';
 
@@ -13,7 +13,12 @@ const SideNavLinks = () => {
         <IconContext.Provider value={{ className: styles['icon'] }}>
             <ul className={`${styles['nav-links']}`}>
                 <li>
-
+                    <a target="_blank" rel="noopener noreferrer" href={`https://calendar.pcon.in/calendar/pcon`}>
+                        <FaCalendar />
+                        <p>Calendar</p>
+                    </a>
+                </li>
+                <li>
                     <NavLink exact to={navigationRoutes.PROJECTS} activeClassName={styles['active']}>
                         <SiMoleculer />
                         <p>PROJECTS</p>
